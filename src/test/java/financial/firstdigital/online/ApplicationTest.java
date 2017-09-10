@@ -12,5 +12,4 @@ public class ApplicationTest {
     public void main() throws Exception {
         Assert.assertTrue(true);
     }
-
 }
