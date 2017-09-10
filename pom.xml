@@ -138,6 +138,7 @@
                 <version>4.3.0</version>
                 <configuration>
                     <repoToken>${env.COVERALLS_REPO_TOKEN}</repoToken>
+                    <serviceName>${env.COVERALLS_SERVICE_NAME}</serviceName>
                 </configuration>
             </plugin>
         </plugins>
