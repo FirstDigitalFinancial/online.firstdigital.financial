@@ -8,3 +8,7 @@ First Digital Financial Online System is the online system that users interact w
 # Slack
 
 https://firstdigitalfinancial.slack.com/
+
+# License
+
+This is proprietary software.
