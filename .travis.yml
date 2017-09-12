@@ -5,3 +5,5 @@ after_success:
   - mvn clean jacoco:prepare-agent test jacoco:report org.eluder.coveralls:coveralls-maven-plugin:report
 jdk:
   - oraclejdk8
+notifications:
+    slack: firstdigitalfinancial:dX1BVbS30Pi8JiSmCqgbhudZ
