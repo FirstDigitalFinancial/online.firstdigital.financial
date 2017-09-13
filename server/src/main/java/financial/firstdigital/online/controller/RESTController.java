@@ -4,10 +4,7 @@ import financial.firstdigital.online.model.Ping;
 import financial.firstdigital.online.model.PingJsonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * The RESTController is the main controller where all the APIs are
@@ -30,6 +27,7 @@ public class RESTController {
      * @return AddressRecordJsonResponse.
      */
     @RequestMapping(value = "/ping", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @CrossOrigin(origins = "http://localhost:4200")
     public @ResponseBody
     PingJsonResponse getPing() {
         logger.debug("Entering getPing()");
