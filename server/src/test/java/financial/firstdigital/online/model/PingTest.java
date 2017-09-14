@@ -1,19 +1,38 @@
 package financial.firstdigital.online.model;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * The PingTest class is a test class that tests Ping.
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-10
  */
 public class PingTest {
 
     private Ping testPing;
+    @Mock
+    private Clock mockClock;
+    private int year = 2017;
+    private int month = 2;
+    private int day = 3;
+
+    private int hour = 22;
+    private int minute = 11;
+    private int second = 00;
 
     /**
      * Sets up objects and mocks external dependencies needed
@@ -21,7 +40,14 @@ public class PingTest {
      */
     @Before
     public void setUp() throws Exception {
-        testPing = new Ping();
+
+        Clock mockClock =
+                Clock.fixed(
+                        LocalDateTime.of(year, month, day, hour, minute, second).toInstant(OffsetDateTime.now().getOffset()),
+                        Clock.systemDefaultZone().getZone());
+
+        testPing = new Ping(mockClock);
+
     }
 
     /**
@@ -38,8 +64,10 @@ public class PingTest {
      */
     @Test
     public void toString_StringReturned_Passes() throws Exception {
-        Assert.assertEquals( "toString() has failed",
-                "Ping{response=pong}", testPing.toString());
+
+
+         Assert.assertEquals( "toString() has failed",
+                "Ping{response=pong, date=2017-02-03, time=21:11:00}", testPing.toString());
     }
 
 }

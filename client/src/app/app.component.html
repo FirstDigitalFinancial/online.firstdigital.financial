@@ -1,5 +1,12 @@
-<h1>{{title}}</h1>
-<nav>
+<div class="site-title-wrapper">
+  <h1 class="site-title"><a href="http://firstdigital.financial/" rel="home">First Digital Financial</a></h1>
+  <div class="site-description">Making digital finance easy</div>
+</div><!-- .site-title-wrapper -->
+
+<nav id="site-navigation" class="main-navigation">
+
+<div class="menu-primary-menu-container">
+ <nav>
   <a routerLink="/homepage" routerLinkActive="active">Home</a>
   <a routerLink="/about" routerLinkActive="active">About Us</a>
   <a routerLink="/services" routerLinkActive="active">Services</a>
@@ -9,3 +16,5 @@
   <!--<a routerLink="/login" routerLinkActive="active">Login</a>-->
 </nav>
 <router-outlet></router-outlet>
+</div>
+</nav>
