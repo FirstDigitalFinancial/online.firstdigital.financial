@@ -1,2 +1,11 @@
-<h2>The server says {{data?.result?.response}}! </h2>
-
+<h1>{{title}}</h1>
+<nav>
+  <a routerLink="/homepage" routerLinkActive="active">Home</a>
+  <a routerLink="/about" routerLinkActive="active">About Us</a>
+  <a routerLink="/services" routerLinkActive="active">Services</a>
+  <!--<a routerLink="/blog" routerLinkActive="active">Blog</a>-->
+  <!--<a routerLink="/contact-us" routerLinkActive="Conact Us">Home</a>-->
+  <!--<a routerLink="/faq" routerLinkActive="active">FAQ</a>-->
+  <!--<a routerLink="/login" routerLinkActive="active">Login</a>-->
+</nav>
+<router-outlet></router-outlet>
