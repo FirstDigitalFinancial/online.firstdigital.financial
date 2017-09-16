@@ -6,7 +6,7 @@ import financial.firstdigital.online.model.Currency;
 import org.springframework.stereotype.Repository;
 
 @Repository("accountDetailDAO")
-public class AccountDetailDAOImpl extends AbstractDAO implements AccountDetailDAO {
+public class AccountDetailDAOImpl implements AccountDetailDAO {
 
 
     public AccountDetail getAccountDetailByAccountNumber(Long accountNumber) {
