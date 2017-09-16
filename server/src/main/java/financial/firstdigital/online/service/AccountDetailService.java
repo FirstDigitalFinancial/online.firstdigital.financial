@@ -12,6 +12,7 @@ import financial.firstdigital.online.model.AccountDetail;
 
 public interface AccountDetailService {
 
-    public AccountDetail getAccountByAccountNumber(Long accountNumber);
+    public void saveAccountDetail(AccountDetail accountDetail);
+    public AccountDetail findDistinctByAccountNumberEquals(Long accountNumber);
 
 }
