@@ -10,6 +10,18 @@ package financial.firstdigital.online.model;
  */
 
 public enum AccountStatus {
-    OPEN,
-    CLOSED
+    OPEN("Open"),
+    CLOSED("Closed"),
+    ON_HOLD("On Hold");
+
+    private final String displayName;
+
+    AccountStatus(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
 }

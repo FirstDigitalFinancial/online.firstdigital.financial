@@ -8,7 +8,7 @@ import javax.validation.constraints.AssertTrue;
 
 import static org.junit.Assert.*;
 
-public class AccountTest {
+public class AccountDetailTest {
     @Before
     public void setUp() throws Exception {
         Assert.assertTrue(true);

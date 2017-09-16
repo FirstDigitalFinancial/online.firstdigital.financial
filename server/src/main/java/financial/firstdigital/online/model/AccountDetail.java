@@ -1,19 +1,42 @@
 package financial.firstdigital.online.model;
 
+import javax.persistence.*;
+
 /**
- * The Account class contains information
+ * The AccountDetail class contains information
  * about the customer account
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-15
  */
 
-public class Account {
+@Entity
+@Table(name = "fdf_account")
+public class AccountDetail {
 
+    @Id
+    @Column(name = "accountNumber")
+    private Long accountNumber;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "currency")
+    @Enumerated(EnumType.STRING)
     private Currency currency;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private AccountStatus status;
+
+    public Long getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(Long accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
     public String getAddress() {
         return address;
@@ -41,8 +64,9 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
-                "address='" + address + '\'' +
+        return "AccountDetail{" +
+                "accountNumber=" + accountNumber +
+                ", address='" + address + '\'' +
                 ", currency=" + currency +
                 ", status=" + status +
                 '}';
