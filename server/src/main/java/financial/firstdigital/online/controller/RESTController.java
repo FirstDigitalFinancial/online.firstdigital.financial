@@ -2,8 +2,10 @@ package financial.firstdigital.online.controller;
 
 import financial.firstdigital.online.model.Ping;
 import financial.firstdigital.online.model.PingJsonResponse;
+import financial.firstdigital.online.service.AccountDetailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Clock;
@@ -25,6 +27,13 @@ public class RESTController {
 
     private static final Logger logger =
             LoggerFactory.getLogger(RESTController.class);
+
+    AccountDetailService accountDetailService;
+
+    @Autowired
+    public void setAccountDetailService(AccountDetailService accountDetailService) {
+        this.accountDetailService = accountDetailService;
+    }
 
     /**
      * Gets the PingJsonResponse for the controller.
