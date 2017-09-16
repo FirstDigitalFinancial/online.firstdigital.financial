@@ -16,8 +16,8 @@ import javax.persistence.*;
 public class AccountDetail {
 
     @Id
-    @Column(name = "accountNumber")
-    private Long accountNumber;
+    @Column(name = "accountId")
+    private Long accountId;
 
     @Column(name = "address")
     private String address;
@@ -30,12 +30,12 @@ public class AccountDetail {
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
-    public Long getAccountNumber() {
-        return accountNumber;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setAccountNumber(Long accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public String getAddress() {
@@ -65,7 +65,7 @@ public class AccountDetail {
     @Override
     public String toString() {
         return "AccountDetail{" +
-                "accountNumber=" + accountNumber +
+                "accountId=" + accountId +
                 ", address='" + address + '\'' +
                 ", currency=" + currency +
                 ", status=" + status +

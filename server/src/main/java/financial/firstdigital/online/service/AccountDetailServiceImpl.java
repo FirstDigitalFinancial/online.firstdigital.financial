@@ -22,9 +22,9 @@ public class AccountDetailServiceImpl implements AccountDetailService {
     @Autowired
     private AccountDetailRepository accountDetailRepository;
 
-    public AccountDetail findDistinctByAccountNumberEquals(Long accountNumber) {
+    public AccountDetail findDistinctByAccountIdEquals(Long accountId) {
 
-        return accountDetailRepository.findDistinctByAccountNumberEquals(accountNumber);
+        return accountDetailRepository.findDistinctByAccountIdEquals(accountId);
     }
 
     public void saveAccountDetail(AccountDetail accountDetail) {

@@ -12,6 +12,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface AccountDetailRepository extends CrudRepository<AccountDetail,Long> {
 
-    public AccountDetail findDistinctByAccountNumberEquals(Long accountNumber);
+    public AccountDetail findDistinctByAccountIdEquals(Long accountId);
 
 }

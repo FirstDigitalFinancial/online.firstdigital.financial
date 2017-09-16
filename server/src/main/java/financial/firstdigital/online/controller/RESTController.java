@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Clock;
-import java.time.Instant;
 
 /**
  * The RESTController is the main controller where all the APIs are
@@ -56,9 +55,9 @@ public class RESTController {
         return (pingJsonResponse);
     }
 
-    @RequestMapping(value = "/account/{accountNumber}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/account/{accountId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody
-    AccountDetailJsonReponse getAccountDetail(@PathVariable Long accountNumber) {
+    AccountDetailJsonReponse getAccountDetail(@PathVariable Long accountId) {
 
         logger.debug("Entering getAccountDetail");
 
@@ -66,11 +65,11 @@ public class RESTController {
         accountDetail.setStatus(AccountStatus.OPEN);
         accountDetail.setCurrency(Currency.ETHEREUM);
         accountDetail.setAddress("0xC38Df9faA80F068675096f0a6da964862E90892B");
-        accountDetail.setAccountNumber(accountNumber);
+        accountDetail.setAccountId(accountId);
         accountDetailService.saveAccountDetail(accountDetail);
 
         AccountDetailJsonReponse accountDetailJsonReponse = new AccountDetailJsonReponse();
-        accountDetailJsonReponse.setAccountDetail(accountDetailService.findDistinctByAccountNumberEquals(accountNumber));
+        accountDetailJsonReponse.setAccountDetail(accountDetailService.findDistinctByAccountIdEquals(accountId));
 
         return accountDetailJsonReponse;
     }

@@ -1,7 +1,7 @@
 package financial.firstdigital.online.model;
 
 /**
- * The AccountDetailDAO enumeration details the types of
+ * The Currency enumeration details the types of
  * currency
  *
  * @author  Andy McCall
