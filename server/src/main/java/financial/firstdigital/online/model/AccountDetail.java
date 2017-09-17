@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class AccountDetail {
 
     @Id
+    @GeneratedValue
     @Column(name = "accountId")
     private Long accountId;
 

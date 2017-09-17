@@ -4,7 +4,7 @@ import financial.firstdigital.online.model.CustomerDetail;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * The AccountDetailDAO class
+ * The CustomerDetailRepository class
  *
  * @author  Andy McCall
  * @version 0.1

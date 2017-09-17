@@ -2,10 +2,7 @@ package financial.firstdigital.online.model;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -23,6 +20,7 @@ import java.math.BigDecimal;
 public class TransactionDetail {
 
     @Id
+    @GeneratedValue
     @Column(name = "transactionId")
     private Long transactionId;
 
