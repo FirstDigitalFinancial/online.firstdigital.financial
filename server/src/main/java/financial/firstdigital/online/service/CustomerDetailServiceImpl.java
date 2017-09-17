@@ -22,7 +22,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
     @Autowired
     private CustomerDetailRepository customerDetailRepository;
 
-    public void saveAccountDetail(CustomerDetail customerDetail) {
+    public void saveCustomerDetail(CustomerDetail customerDetail) {
         customerDetailRepository.save(customerDetail);
     }
     public CustomerDetail findDistinctByCustomerIdEquals(Long customerId) {

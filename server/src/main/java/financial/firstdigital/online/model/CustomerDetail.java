@@ -36,4 +36,67 @@ public class CustomerDetail {
     @Column(name = "gender")
     private Gender gender;
 
+    @ManyToOne
+    @JoinColumn(name="addressId")
+    private AddressDetail addressDetail;
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getOtherNames() {
+        return otherNames;
+    }
+
+    public void setOtherNames(String otherNames) {
+        this.otherNames = otherNames;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public AddressDetail getAddressDetail() {
+        return addressDetail;
+    }
+
+    public void setAddressDetail(AddressDetail addressDetail) {
+        this.addressDetail = addressDetail;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerDetail{" +
+                "customerId=" + customerId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", otherNames='" + otherNames + '\'' +
+                ", gender=" + gender +
+                ", addressDetail=" + addressDetail +
+                '}';
+    }
 }

@@ -12,7 +12,7 @@ import financial.firstdigital.online.model.CustomerDetail;
 
 public interface CustomerDetailService {
 
-    public void saveAccountDetail(CustomerDetail customerDetail);
+    public void saveCustomerDetail(CustomerDetail customerDetail);
     public CustomerDetail findDistinctByCustomerIdEquals(Long customerId);
 
 }

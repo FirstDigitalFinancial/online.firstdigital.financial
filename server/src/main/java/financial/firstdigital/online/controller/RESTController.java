@@ -1,8 +1,7 @@
 package financial.firstdigital.online.controller;
 
 import financial.firstdigital.online.model.*;
-import financial.firstdigital.online.service.AccountDetailService;
-import financial.firstdigital.online.service.TransactionDetailService;
+import financial.firstdigital.online.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +31,10 @@ public class RESTController {
 
     AccountDetailService accountDetailService;
     TransactionDetailService transactionDetailService;
+    CustomerDetailService customerDetailService;
+    AddressDetailService addressDetailService;
+    CountyService countyService;
+    TownService townService;
 
     @Autowired
     public void setAccountDetailService(AccountDetailService accountDetailService) {
@@ -41,6 +44,26 @@ public class RESTController {
     @Autowired
     public void setTransactionDetailService(TransactionDetailService transactionDetailService) {
         this.transactionDetailService = transactionDetailService;
+    }
+
+    @Autowired
+    public void setCustomerDetailService(CustomerDetailService customerDetailService) {
+        this.customerDetailService = customerDetailService;
+    }
+
+    @Autowired
+    public void setAddressDetailService(AddressDetailService addressDetailService) {
+        this.addressDetailService = addressDetailService;
+    }
+
+    @Autowired
+    public void setCountyService(CountyService countyService) {
+        this.countyService = countyService;
+    }
+
+    @Autowired
+    public void setTownService(TownService townService) {
+        this.townService = townService;
     }
 
     /**
@@ -105,6 +128,39 @@ public class RESTController {
         transactionDetailJsonResponse.setResult(Arrays.asList(transactionDetailService.findDistinctByTransactionIdEquals(transactionId)));
 
         return transactionDetailJsonResponse;
+
+    }
+
+    @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody
+    GenericJsonResponse getCustomerDetail(@PathVariable Long customerId) {
+
+        logger.debug("Entering getTransactionDetail");
+
+        Town town = townService.findDistinctByTownIdEquals(685);
+        County county = countyService.findDistinctByCountyIdEquals(27);
+
+        AddressDetail addressDetail = new AddressDetail();
+        addressDetail.setHouseNumber(95);
+        addressDetail.setHouseName("Torrington");
+        addressDetail.setStreetName("Newton Drive");
+        addressDetail.setTown(town);
+        addressDetail.setCounty(county);
+        addressDetailService.saveAddressDetail(addressDetail);
+
+        CustomerDetail customerDetail = new CustomerDetail();
+        customerDetail.setAddressDetail(addressDetail);
+        customerDetail.setFirstName("Andy");
+        customerDetail.setLastName("McCall");
+        customerDetail.setOtherNames("Edward");
+        customerDetail.setGender(Gender.MALE);
+        customerDetail.setCustomerId(1L);
+        customerDetailService.saveCustomerDetail(customerDetail);
+
+        GenericJsonResponse<CustomerDetail> customerDetailJsonResponse = new GenericJsonResponse<CustomerDetail>();
+        customerDetailJsonResponse.setResult(Arrays.asList(customerDetailService.findDistinctByCustomerIdEquals(customerId)));
+
+        return customerDetailJsonResponse;
 
     }
 

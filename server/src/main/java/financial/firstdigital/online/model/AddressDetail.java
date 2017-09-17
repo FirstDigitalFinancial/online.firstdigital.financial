@@ -30,6 +30,10 @@ public class AddressDetail {
     private String streetName;
 
     @ManyToOne
+    @JoinColumn(name="townId")
+    private Town town;
+
+    @ManyToOne
     @JoinColumn(name="countyId")
     private County county;
 
@@ -61,11 +65,19 @@ public class AddressDetail {
         this.streetName = streetName;
     }
 
-//    public County getCounty() {
-//        return county;
-//    }
-//
-//    public void setCounty(County county) {
-//        this.county = county;
-//    }
+    public Town getTown() {
+        return town;
+    }
+
+    public void setTown(Town town) {
+        this.town = town;
+    }
+
+    public County getCounty() {
+        return county;
+    }
+
+    public void setCounty(County county) {
+        this.county = county;
+    }
 }
