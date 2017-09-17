@@ -17,7 +17,7 @@ public class County {
 
     @Id
     @GeneratedValue
-    @Column(name = "countyId")
+    @Column(name = "countyId", columnDefinition = "serial")
     private int countyId;
 
     @Column(name = "countyName")

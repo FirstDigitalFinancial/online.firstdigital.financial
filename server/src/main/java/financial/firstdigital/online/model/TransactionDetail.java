@@ -21,7 +21,7 @@ public class TransactionDetail {
 
     @Id
     @GeneratedValue
-    @Column(name = "transactionId")
+    @Column(name = "transactionId", columnDefinition = "serial")
     private Long transactionId;
 
     @Column(name = "transactionType")

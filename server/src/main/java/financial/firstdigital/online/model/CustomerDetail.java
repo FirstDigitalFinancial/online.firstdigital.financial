@@ -18,7 +18,7 @@ public class CustomerDetail {
 
     @Id
     @GeneratedValue
-    @Column(name = "customerId")
+    @Column(name = "customerId", columnDefinition = "serial")
     private Long customerId;
 
     @Column(name = "firstName", length = 50)

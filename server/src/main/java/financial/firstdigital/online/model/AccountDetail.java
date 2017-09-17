@@ -17,7 +17,7 @@ public class AccountDetail {
 
     @Id
     @GeneratedValue
-    @Column(name = "accountId")
+    @Column(name = "accountId", columnDefinition = "serial")
     private Long accountId;
 
     @Column(name = "address")
