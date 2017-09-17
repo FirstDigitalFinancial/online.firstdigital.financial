@@ -3,7 +3,7 @@ package financial.firstdigital.online.service;
 import financial.firstdigital.online.model.AccountDetail;
 
 /**
- * The UserService interface
+ * The AccountDetailService interface
  *
  * @author  Andy McCall
  * @version 0.2

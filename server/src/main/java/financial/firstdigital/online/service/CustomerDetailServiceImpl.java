@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 /**
- * The PostServiceImpl class
+ * The CustomerDetailServiceImpl class
  *
  * @author  Andy McCall
  * @version 0.1
@@ -18,7 +18,6 @@ import javax.transaction.Transactional;
 @Service("customerDetailService")
 @Transactional
 public class CustomerDetailServiceImpl implements CustomerDetailService {
-
 
     @Autowired
     private CustomerDetailRepository customerDetailRepository;

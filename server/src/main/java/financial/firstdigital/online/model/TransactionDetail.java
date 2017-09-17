@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  * customers account
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-16
  */
 
@@ -32,4 +32,48 @@ public class TransactionDetail {
     @Column(name = "tansactionValue")
     private BigDecimal transactionValue;
 
+    @Column(name = "endOfTransactionBalance")
+    private BigDecimal endOfTransactionBalance;
+
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public BigDecimal getTransactionValue() {
+        return transactionValue;
+    }
+
+    public void setTransactionValue(BigDecimal transactionValue) {
+        this.transactionValue = transactionValue;
+    }
+
+    public BigDecimal getEndOfTransactionBalance() {
+        return endOfTransactionBalance;
+    }
+
+    public void setEndOfTransactionBalance(BigDecimal endOfTransactionBalance) {
+        this.endOfTransactionBalance = endOfTransactionBalance;
+    }
+
+    @Override
+    public String toString() {
+        return "TransactionDetail{" +
+                "transactionId=" + transactionId +
+                ", transactionType=" + transactionType +
+                ", transactionValue=" + transactionValue +
+                ", endOfTransactionBalance=" + endOfTransactionBalance +
+                '}';
+    }
 }

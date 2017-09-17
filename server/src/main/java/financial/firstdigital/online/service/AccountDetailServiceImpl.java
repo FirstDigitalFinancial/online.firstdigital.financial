@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 /**
- * The PostServiceImpl class
+ * The AccountDetailServiceImpl class
  *
  * @author  Andy McCall
  * @version 0.1

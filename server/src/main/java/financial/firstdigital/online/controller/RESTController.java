@@ -2,12 +2,15 @@ package financial.firstdigital.online.controller;
 
 import financial.firstdigital.online.model.*;
 import financial.firstdigital.online.service.AccountDetailService;
+import financial.firstdigital.online.service.TransactionDetailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.Clock;
+import java.util.Arrays;
 
 /**
  * The RESTController is the main controller where all the APIs are
@@ -28,26 +31,33 @@ public class RESTController {
             LoggerFactory.getLogger(RESTController.class);
 
     AccountDetailService accountDetailService;
+    TransactionDetailService transactionDetailService;
 
     @Autowired
     public void setAccountDetailService(AccountDetailService accountDetailService) {
         this.accountDetailService = accountDetailService;
     }
 
+    @Autowired
+    public void setTransactionDetailService(TransactionDetailService transactionDetailService) {
+        this.transactionDetailService = transactionDetailService;
+    }
+
     /**
-     * Gets the PingJsonResponse for the controller.
-     * @return AddressRecordJsonResponse.
+     * Gets the Ping json for the controller.
+     * @return GenericJsonResponse.
      */
     @RequestMapping(value = "/ping", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody
-    PingJsonResponse getPing() {
+    GenericJsonResponse getPing() {
 
         logger.debug("Entering getPing()");
 
         Ping ping = new Ping(clock);
 
-        PingJsonResponse pingJsonResponse = new PingJsonResponse();
-        pingJsonResponse.setResult(ping);
+        GenericJsonResponse<Ping> pingJsonResponse = new GenericJsonResponse<Ping>();
+
+        pingJsonResponse.setResult(Arrays.asList(ping));
 
         pingJsonResponse.setStatus(200);
 
@@ -57,7 +67,7 @@ public class RESTController {
 
     @RequestMapping(value = "/account/{accountId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody
-    AccountDetailJsonReponse getAccountDetail(@PathVariable Long accountId) {
+    GenericJsonResponse getAccountDetail(@PathVariable Long accountId) {
 
         logger.debug("Entering getAccountDetail");
 
@@ -68,13 +78,35 @@ public class RESTController {
         accountDetail.setAccountId(accountId);
         accountDetailService.saveAccountDetail(accountDetail);
 
-        AccountDetailJsonReponse accountDetailJsonReponse = new AccountDetailJsonReponse();
-        accountDetailJsonReponse.setAccountDetail(accountDetailService.findDistinctByAccountIdEquals(accountId));
+        GenericJsonResponse<AccountDetail> accountDetailJsonReponse = new GenericJsonResponse<AccountDetail>();
+        accountDetailJsonReponse.setResult(Arrays.asList(accountDetailService.findDistinctByAccountIdEquals(accountId)));
 
         return accountDetailJsonReponse;
     }
 
+    @RequestMapping(value = "/transaction/{transactionId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody
+    GenericJsonResponse getTransactionDetail(@PathVariable Long transactionId) {
 
+        logger.debug("Entering getTransactionDetail");
+
+        TransactionDetail transactionDetail = new TransactionDetail();
+
+        BigDecimal transactionValue = new BigDecimal(100.00);
+        BigDecimal endOfTransactionBalance = new BigDecimal(100.00);
+
+        transactionDetail.setTransactionId(transactionId);
+        transactionDetail.setTransactionType(TransactionType.DEPOST);
+        transactionDetail.setTransactionValue(transactionValue);
+        transactionDetail.setEndOfTransactionBalance(endOfTransactionBalance);
+        transactionDetailService.saveTransactionDetail(transactionDetail);
+
+        GenericJsonResponse<TransactionDetail> transactionDetailJsonResponse = new GenericJsonResponse<TransactionDetail>();
+        transactionDetailJsonResponse.setResult(Arrays.asList(transactionDetailService.findDistinctByTransactionIdEquals(transactionId)));
+
+        return transactionDetailJsonResponse;
+
+    }
 
 }
 
