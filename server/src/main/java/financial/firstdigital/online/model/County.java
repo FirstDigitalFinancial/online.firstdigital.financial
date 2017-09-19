@@ -1,5 +1,7 @@
 package financial.firstdigital.online.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -23,6 +25,7 @@ public class County {
     @Column(name = "countyName")
     private String countyName;
 
+    @JsonIgnore
     public int getCountyId() {
         return countyId;
     }

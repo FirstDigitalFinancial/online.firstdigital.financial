@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "fdf_accountdetail")
+@Table(name = "fdf_account_detail")
 public class AccountDetail {
 
     @Id

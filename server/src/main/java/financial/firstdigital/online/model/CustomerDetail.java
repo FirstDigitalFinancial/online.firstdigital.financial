@@ -2,6 +2,7 @@ package financial.firstdigital.online.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * The CustomerDetail class contains information
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
  */
 
 @Entity
-@Table(name = "fdf_customerdetail")
+@Table(name = "fdf_customer_detail")
 public class CustomerDetail {
 
     @Id
@@ -39,6 +40,11 @@ public class CustomerDetail {
     @ManyToOne
     @JoinColumn(name="addressId")
     private AddressDetail addressDetail;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="fdf_customer_account_detail", joinColumns={@JoinColumn(name="customerId", referencedColumnName="customerId")}
+            , inverseJoinColumns={@JoinColumn(name="accountId", referencedColumnName="accountId")})
+    private Set<AccountDetail> accountDetailSet;
 
     public Long getCustomerId() {
         return customerId;
@@ -86,6 +92,12 @@ public class CustomerDetail {
 
     public void setAddressDetail(AddressDetail addressDetail) {
         this.addressDetail = addressDetail;
+    }
+
+    public Set<AccountDetail> getAccountDetailSet() { return accountDetailSet; }
+
+    public void setAccountDetailSet(Set<AccountDetail> accountDetailSet) {
+        this.accountDetailSet = accountDetailSet;
     }
 
     @Override

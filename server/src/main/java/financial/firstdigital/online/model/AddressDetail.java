@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "fdf_addressdetail")
+@Table(name = "fdf_address_detail")
 public class AddressDetail {
 
     @Id
@@ -36,6 +36,9 @@ public class AddressDetail {
     @ManyToOne
     @JoinColumn(name="countyId")
     private County county;
+
+    @Column(name = "postCode", length = 10)
+    private String postCode;
 
     public long getAddressId() {
         return addressId;
@@ -79,5 +82,13 @@ public class AddressDetail {
 
     public void setCounty(County county) {
         this.county = county;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
     }
 }

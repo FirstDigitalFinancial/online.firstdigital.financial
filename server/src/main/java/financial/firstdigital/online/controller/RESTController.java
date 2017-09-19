@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The RESTController is the main controller where all the APIs are
@@ -94,13 +96,6 @@ public class RESTController {
 
         logger.debug("Entering getAccountDetail");
 
-        AccountDetail accountDetail = new AccountDetail();
-        accountDetail.setStatus(AccountStatus.OPEN);
-        accountDetail.setCurrency(Currency.ETHEREUM);
-        accountDetail.setAddress("0xC38Df9faA80F068675096f0a6da964862E90892B");
-        accountDetail.setAccountId(accountId);
-        accountDetailService.saveAccountDetail(accountDetail);
-
         GenericJsonResponse<AccountDetail> accountDetailJsonReponse = new GenericJsonResponse<AccountDetail>();
         accountDetailJsonReponse.setResult(Arrays.asList(accountDetailService.findDistinctByAccountIdEquals(accountId)));
 
@@ -146,6 +141,7 @@ public class RESTController {
         addressDetail.setStreetName("Newton Drive");
         addressDetail.setTown(town);
         addressDetail.setCounty(county);
+        addressDetail.setPostCode("FY3 8LX");
         addressDetailService.saveAddressDetail(addressDetail);
 
         CustomerDetail customerDetail = new CustomerDetail();
@@ -155,6 +151,25 @@ public class RESTController {
         customerDetail.setOtherNames("Edward");
         customerDetail.setGender(Gender.MALE);
         customerDetail.setCustomerId(1L);
+
+        AccountDetail accountDetail = new AccountDetail();
+        accountDetail.setStatus(AccountStatus.OPEN);
+        accountDetail.setCurrency(Currency.ETHEREUM);
+        accountDetail.setAddress("0xC38Df9faA80F068675096f0a6da964862E90892B");
+        accountDetail.setAccountId(1000001L);
+
+        AccountDetail accountDetail2 = new AccountDetail();
+        accountDetail2.setStatus(AccountStatus.OPEN);
+        accountDetail2.setCurrency(Currency.BITCOIN_CORE);
+        accountDetail2.setAddress("1DexwwKk4UJQKtjJ7rz4h8YbHtJeGLmxEx");
+        accountDetail2.setAccountId(1000002L);
+
+        Set<AccountDetail> accountDetailSet = new HashSet<AccountDetail>();
+        accountDetailSet.add(accountDetail);
+        accountDetailSet.add(accountDetail2);
+
+        customerDetail.setAccountDetailSet(accountDetailSet);
+
         customerDetailService.saveCustomerDetail(customerDetail);
 
         GenericJsonResponse<CustomerDetail> customerDetailJsonResponse = new GenericJsonResponse<CustomerDetail>();

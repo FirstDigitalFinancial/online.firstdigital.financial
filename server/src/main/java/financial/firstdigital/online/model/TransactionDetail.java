@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Table(name = "fdf_transactiondetail")
+@Table(name = "fdf_transaction_detail")
 public class TransactionDetail {
 
     @Id
