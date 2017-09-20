@@ -9,7 +9,7 @@ import java.util.Set;
  * about the customer
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-16
  */
 
@@ -21,6 +21,10 @@ public class CustomerDetail {
     @GeneratedValue
     @Column(name = "customerId", columnDefinition = "serial")
     private Long customerId;
+
+    @ManyToOne
+    @JoinColumn(name = "titleId")
+    private Title title;
 
     @Column(name = "firstName", length = 50)
     @Size(max = 50)
@@ -52,6 +56,14 @@ public class CustomerDetail {
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public Title getTitle() {
+        return title;
+    }
+
+    public void setTitle(Title title) {
+        this.title = title;
     }
 
     public String getFirstName() {
@@ -104,11 +116,13 @@ public class CustomerDetail {
     public String toString() {
         return "CustomerDetail{" +
                 "customerId=" + customerId +
+                ", title=" + title +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", otherNames='" + otherNames + '\'' +
                 ", gender=" + gender +
                 ", addressDetail=" + addressDetail +
+                ", accountDetailSet=" + accountDetailSet +
                 '}';
     }
 }

@@ -37,6 +37,7 @@ public class RESTController {
     AddressDetailService addressDetailService;
     CountyService countyService;
     TownService townService;
+    TitleService titleService;
 
     @Autowired
     public void setAccountDetailService(AccountDetailService accountDetailService) {
@@ -67,6 +68,9 @@ public class RESTController {
     public void setTownService(TownService townService) {
         this.townService = townService;
     }
+
+    @Autowired
+    public void setTitleService(TitleService titleService) { this.titleService = titleService; }
 
     /**
      * Gets the Ping json for the controller.
@@ -144,8 +148,11 @@ public class RESTController {
         addressDetail.setPostCode("FY3 8LX");
         addressDetailService.saveAddressDetail(addressDetail);
 
+        Title title = titleService.findDistinctByTitleIdEquals(1);
+
         CustomerDetail customerDetail = new CustomerDetail();
         customerDetail.setAddressDetail(addressDetail);
+        customerDetail.setTitle(title);
         customerDetail.setFirstName("Andy");
         customerDetail.setLastName("McCall");
         customerDetail.setOtherNames("Edward");
