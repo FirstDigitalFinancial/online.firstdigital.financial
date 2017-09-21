@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class Title {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "titleId", columnDefinition = "serial")
     private int titleId;
 

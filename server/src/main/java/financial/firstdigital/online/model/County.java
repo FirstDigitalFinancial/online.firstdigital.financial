@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class County {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "countyId", columnDefinition = "serial")
     private int countyId;
 

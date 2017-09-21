@@ -38,6 +38,7 @@ public class RESTController {
     CountyService countyService;
     TownService townService;
     TitleService titleService;
+    MarketingPreferenceService marketingPreferenceService;
 
     @Autowired
     public void setAccountDetailService(AccountDetailService accountDetailService) {
@@ -71,6 +72,11 @@ public class RESTController {
 
     @Autowired
     public void setTitleService(TitleService titleService) { this.titleService = titleService; }
+
+    @Autowired
+    public void setMarketingPreferenceService(MarketingPreferenceService marketingPreferenceService) {
+        this.marketingPreferenceService = marketingPreferenceService;
+    }
 
     /**
      * Gets the Ping json for the controller.
@@ -117,7 +123,6 @@ public class RESTController {
         BigDecimal transactionValue = new BigDecimal(100.00);
         BigDecimal endOfTransactionBalance = new BigDecimal(100.00);
 
-        transactionDetail.setTransactionId(transactionId);
         transactionDetail.setTransactionType(TransactionType.DEPOST);
         transactionDetail.setTransactionValue(transactionValue);
         transactionDetail.setEndOfTransactionBalance(endOfTransactionBalance);
@@ -157,25 +162,34 @@ public class RESTController {
         customerDetail.setLastName("McCall");
         customerDetail.setOtherNames("Edward");
         customerDetail.setGender(Gender.MALE);
-        customerDetail.setCustomerId(1L);
+        customerDetail.setEmailAddress("andy.mccall@gmail.com");
 
         AccountDetail accountDetail = new AccountDetail();
         accountDetail.setStatus(AccountStatus.OPEN);
         accountDetail.setCurrency(Currency.ETHEREUM);
         accountDetail.setAddress("0xC38Df9faA80F068675096f0a6da964862E90892B");
-        accountDetail.setAccountId(1000001L);
 
         AccountDetail accountDetail2 = new AccountDetail();
         accountDetail2.setStatus(AccountStatus.OPEN);
         accountDetail2.setCurrency(Currency.BITCOIN_CORE);
         accountDetail2.setAddress("1DexwwKk4UJQKtjJ7rz4h8YbHtJeGLmxEx");
-        accountDetail2.setAccountId(1000002L);
 
         Set<AccountDetail> accountDetailSet = new HashSet<AccountDetail>();
         accountDetailSet.add(accountDetail);
         accountDetailSet.add(accountDetail2);
 
         customerDetail.setAccountDetailSet(accountDetailSet);
+
+        MarketingPreferenceDetail marketingPreferenceDetail = new MarketingPreferenceDetail();
+        marketingPreferenceDetail.setByApp(false);
+        marketingPreferenceDetail.setByEmail(true);
+        marketingPreferenceDetail.setByPhone(false);
+        marketingPreferenceDetail.setByPost(true);
+        marketingPreferenceDetail.setBySocial(true);
+        marketingPreferenceDetail.setByText(false);
+        marketingPreferenceService.saveMarketingPreferenceDetail(marketingPreferenceDetail);
+
+        customerDetail.setMarketingPreferenceDetail(marketingPreferenceDetail);
 
         customerDetailService.saveCustomerDetail(customerDetail);
 

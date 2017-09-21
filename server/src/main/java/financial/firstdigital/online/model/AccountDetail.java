@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class AccountDetail {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "accountId", columnDefinition = "serial")
     private Long accountId;
 
@@ -33,10 +33,6 @@ public class AccountDetail {
 
     public Long getAccountId() {
         return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
     }
 
     public String getAddress() {

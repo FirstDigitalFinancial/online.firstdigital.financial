@@ -18,7 +18,7 @@ import java.util.Set;
 public class CustomerDetail {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customerId", columnDefinition = "serial")
     private Long customerId;
 
@@ -45,17 +45,24 @@ public class CustomerDetail {
     @JoinColumn(name="addressId")
     private AddressDetail addressDetail;
 
+    @Column(name = "emailAddress", length = 250)
+    private String emailAddress;
+
     @OneToMany(cascade=CascadeType.ALL)
     @JoinTable(name="fdf_customer_account_detail", joinColumns={@JoinColumn(name="customerId", referencedColumnName="customerId")}
             , inverseJoinColumns={@JoinColumn(name="accountId", referencedColumnName="accountId")})
     private Set<AccountDetail> accountDetailSet;
 
+    @OneToOne
+    @JoinColumn(name="marketingPreferenceId")
+    private MarketingPreferenceDetail marketingPreferenceDetail;
+
+//    @OneToOne
+//    @JoinColumn(name = "loginId")
+//    private LoginDetail loginDetail;
+
     public Long getCustomerId() {
         return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
     }
 
     public Title getTitle() {
@@ -106,11 +113,35 @@ public class CustomerDetail {
         this.addressDetail = addressDetail;
     }
 
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
     public Set<AccountDetail> getAccountDetailSet() { return accountDetailSet; }
 
     public void setAccountDetailSet(Set<AccountDetail> accountDetailSet) {
         this.accountDetailSet = accountDetailSet;
     }
+
+    public MarketingPreferenceDetail getMarketingPreferenceDetail() {
+        return marketingPreferenceDetail;
+    }
+
+    public void setMarketingPreferenceDetail(MarketingPreferenceDetail marketingPreferenceDetail) {
+        this.marketingPreferenceDetail = marketingPreferenceDetail;
+    }
+
+//    public LoginDetail getLoginDetail() {
+//        return loginDetail;
+//    }
+//
+//    public void setLoginDetail(LoginDetail loginDetail) {
+//        this.loginDetail = loginDetail;
+//    }
 
     @Override
     public String toString() {
@@ -122,7 +153,10 @@ public class CustomerDetail {
                 ", otherNames='" + otherNames + '\'' +
                 ", gender=" + gender +
                 ", addressDetail=" + addressDetail +
+                ", emailAddress='" + emailAddress + '\'' +
                 ", accountDetailSet=" + accountDetailSet +
+                ", marketingPreferenceDetail=" + marketingPreferenceDetail +
+//                ", loginDetail=" + loginDetail +
                 '}';
     }
 }

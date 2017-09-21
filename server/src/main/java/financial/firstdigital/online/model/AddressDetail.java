@@ -16,9 +16,9 @@ import javax.persistence.*;
 public class AddressDetail {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "addressId", columnDefinition = "serial")
-    private long addressId;
+    private Long addressId;
 
     @Column(name = "houseNumber")
     private int houseNumber;
@@ -40,7 +40,7 @@ public class AddressDetail {
     @Column(name = "postCode", length = 10)
     private String postCode;
 
-    public long getAddressId() {
+    public Long getAddressId() {
         return addressId;
     }
 

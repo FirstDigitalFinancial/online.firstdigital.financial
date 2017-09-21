@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 public class TransactionDetail {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transactionId", columnDefinition = "serial")
     private Long transactionId;
 
@@ -33,12 +33,12 @@ public class TransactionDetail {
     @Column(name = "endOfTransactionBalance")
     private BigDecimal endOfTransactionBalance;
 
+    @JoinColumn(name = "accountId")
+    @ManyToOne
+    private AccountDetail accountDetail;
+
     public Long getTransactionId() {
         return transactionId;
-    }
-
-    public void setTransactionId(Long transactionId) {
-        this.transactionId = transactionId;
     }
 
     public TransactionType getTransactionType() {
