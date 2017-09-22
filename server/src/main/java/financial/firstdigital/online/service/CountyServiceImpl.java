@@ -18,4 +18,8 @@ public class CountyServiceImpl implements CountyService {
         return countyRepository.findDistinctByCountyIdEquals(countyId);
     }
 
+    public County findDistinctByCountyNameEquals(String countyName) {
+        return countyRepository.findDistinctByCountyNameEquals(countyName);
+    }
+
 }

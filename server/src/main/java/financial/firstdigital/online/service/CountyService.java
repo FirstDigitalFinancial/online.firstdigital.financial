@@ -13,5 +13,6 @@ import financial.firstdigital.online.model.County;
 public interface CountyService {
 
     public County findDistinctByCountyIdEquals(int countyId);
+    public County findDistinctByCountyNameEquals(String countyName);
 
 }

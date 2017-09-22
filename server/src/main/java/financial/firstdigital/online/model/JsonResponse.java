@@ -11,7 +11,7 @@ package financial.firstdigital.online.model;
 public abstract class JsonResponse {
 
     private int status;
-    private String error;
+    private String message;
 
     /**
      * Gets the status of the JsonResponse.
@@ -30,27 +30,27 @@ public abstract class JsonResponse {
     }
 
     /**
-     * Gets the error of the JsonResponse.
-     * @return String containing error.
+     * Gets the message of the JsonResponse.
+     * @return String containing message.
      */
-    public String getError() {
-        return error;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * Sets the error of the JsonResponse.
-     * @param error containing error of JsonResponse, must not be empty and
+     * Sets the message of the JsonResponse.
+     * @param message containing message of JsonResponse, must not be empty and
      *               cannot contain only whitespace.
      * @exception IllegalArgumentException if error is empty or contains only whitespace.
      */
-    public void setError(String error) {
+    public void setMessage(String message) {
 
         // Check if the error only contains whitespace or is empty
         // everything else is valid
-        if (error.trim().length() == 0) {
-            throw new IllegalArgumentException("Invalid error: " + error);
+        if (message.trim().length() == 0) {
+            throw new IllegalArgumentException("Invalid error: " + message);
         }
-        this.error = error;
+        this.message = message;
 
     }
 

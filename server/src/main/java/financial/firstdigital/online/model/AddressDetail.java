@@ -91,4 +91,17 @@ public class AddressDetail {
     public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
+
+    @Override
+    public String toString() {
+        return "AddressDetail{" +
+                "addressId=" + addressId +
+                ", houseNumber=" + houseNumber +
+                ", houseName='" + houseName + '\'' +
+                ", streetName='" + streetName + '\'' +
+                ", town=" + town +
+                ", county=" + county +
+                ", postCode='" + postCode + '\'' +
+                '}';
+    }
 }

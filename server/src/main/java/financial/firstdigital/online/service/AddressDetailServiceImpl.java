@@ -31,4 +31,9 @@ public class AddressDetailServiceImpl implements AddressDetailService {
         addressDetailRepository.save(addressDetail);
     }
 
+    public AddressDetail findDistinctByHouseNumberEqualsAndPostCodeEquals(int houseNumber, String postCode) {
+        return addressDetailRepository.findDistinctByHouseNumberEqualsAndPostCodeEquals(houseNumber, postCode);
+    }
+
+
 }

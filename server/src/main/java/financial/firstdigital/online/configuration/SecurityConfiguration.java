@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/user/**", "/includes/**").permitAll();
+        http.csrf().disable();
     }
 
     @Autowired

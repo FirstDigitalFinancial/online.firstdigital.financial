@@ -25,10 +25,11 @@ public class Town {
     @Column(name = "townName")
     private String townName;
 
-    @JsonIgnore
     public int getTownId() {
         return townId;
     }
+
+    public void setTownId(int townId) { this.townId = townId; }
 
     public String getTownName() {
         return townName;

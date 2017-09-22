@@ -12,4 +12,5 @@ import financial.firstdigital.online.model.Town;
 
 public interface TownService {
     public Town findDistinctByTownIdEquals(int townId);
+    public Town findDistinctByTownNameEquals(String townName);
 }

@@ -13,4 +13,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AddressDetailRepository extends CrudRepository<AddressDetail,Long> {
     public AddressDetail findDistinctByAddressIdEquals(Long addressId);
+    public AddressDetail findDistinctByHouseNumberEqualsAndPostCodeEquals(int houseNumber, String postCode);
 }

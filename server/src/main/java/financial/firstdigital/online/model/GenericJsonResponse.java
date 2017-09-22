@@ -26,7 +26,7 @@ public class GenericJsonResponse<T> extends JsonResponse {
         return "GenericJsonResponse{" +
                 "status=" + super.getStatus() +
                 ", result=" + result +
-                ", error='" + super.getError() +
+                ", message='" + super.getMessage() +
                 '}';
     }
 }

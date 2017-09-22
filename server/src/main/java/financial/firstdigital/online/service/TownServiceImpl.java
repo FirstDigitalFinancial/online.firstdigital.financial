@@ -26,5 +26,8 @@ public class TownServiceImpl implements TownService {
         return townRepository.findDistinctByTownIdEquals(townId);
     }
 
+    public Town findDistinctByTownNameEquals(String townName) {
+        return townRepository.findDistinctByTownNameEquals(townName);
+    }
 
 }

@@ -25,9 +25,16 @@ public class County {
     @Column(name = "countyName")
     private String countyName;
 
-    @JsonIgnore
+    public void setCountyId(int countyId) {
+        this.countyId = countyId;
+    }
+
     public int getCountyId() {
         return countyId;
+    }
+
+    public void setCountyName(String countyName) {
+        this.countyName = countyName;
     }
 
     public String getCountyName() {

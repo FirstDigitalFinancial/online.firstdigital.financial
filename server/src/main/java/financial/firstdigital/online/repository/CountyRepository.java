@@ -13,4 +13,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CountyRepository extends CrudRepository<County, Long> {
     public County findDistinctByCountyIdEquals(int countyId);
+    public County findDistinctByCountyNameEquals(String countyName);
 }

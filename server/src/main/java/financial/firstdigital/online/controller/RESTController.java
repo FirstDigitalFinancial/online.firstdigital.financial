@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.TEXT_PLAIN;
+
 /**
  * The RESTController is the main controller where all the APIs are
  * called from.
@@ -198,6 +201,48 @@ public class RESTController {
 
         return customerDetailJsonResponse;
 
+    }
+
+    @RequestMapping(value = "/address/", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    GenericJsonResponse setAddressDetail(@RequestBody AddressDetail addressDetail) {
+
+        logger.debug("Entering setAddressDetail");
+
+        Town newTown = townService.findDistinctByTownNameEquals(addressDetail.getTown().getTownName());
+        County newCounty = countyService.findDistinctByCountyNameEquals(addressDetail.getCounty().getCountyName());
+
+        AddressDetail newAddressDetail1 = addressDetail;
+
+        newAddressDetail1.setTown(newTown);
+        newAddressDetail1.setCounty(newCounty);
+
+        if (addressDetail != null ) {
+            addressDetailService.saveAddressDetail(newAddressDetail1);
+        }
+
+        GenericJsonResponse<AddressDetail> addressDetailJsonReponse = new GenericJsonResponse<AddressDetail>();
+        addressDetailJsonReponse.setStatus(200);
+        addressDetailJsonReponse.setMessage("OK");
+        addressDetailJsonReponse.setResult(Arrays.asList(
+                addressDetailService.findDistinctByHouseNumberEqualsAndPostCodeEquals(
+                        addressDetail.getHouseNumber(),
+                        addressDetail.getPostCode())));
+
+        return addressDetailJsonReponse;
+
+    }
+
+    @RequestMapping(value = "/address/{addressId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody
+    GenericJsonResponse getAddressDetail(@PathVariable Long addressId) {
+
+        logger.debug("Entering getAddressDetail");
+
+        GenericJsonResponse<AddressDetail> addressDetailJsonReponse = new GenericJsonResponse<AddressDetail>();
+        addressDetailJsonReponse.setResult(Arrays.asList(addressDetailService.findDistinctByAddressIdEquals(addressId)));
+
+        return addressDetailJsonReponse;
     }
 
 }

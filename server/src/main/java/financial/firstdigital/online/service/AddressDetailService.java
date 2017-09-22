@@ -14,5 +14,6 @@ public interface AddressDetailService {
 
     public void saveAddressDetail(AddressDetail addressDetail);
     public AddressDetail findDistinctByAddressIdEquals(Long addressId);
+    public AddressDetail findDistinctByHouseNumberEqualsAndPostCodeEquals(int houseNumber, String postCode);
 
 }

@@ -13,4 +13,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TownRepository extends CrudRepository<Town, Long>{
     public Town findDistinctByTownIdEquals(int townId);
+    public Town findDistinctByTownNameEquals(String townName);
 }
