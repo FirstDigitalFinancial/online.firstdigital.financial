@@ -25,8 +25,8 @@ public class MarketingPreferenceServiceImpl implements MarketingPreferenceServic
     public void saveMarketingPreferenceDetail(MarketingPreferenceDetail marketingPreferenceDetail) {
         marketingPreferenceRepository.save(marketingPreferenceDetail);
     }
-    public MarketingPreferenceDetail getDistinctByMarketingPreferenceIdEquals(int marketingPreferenceId) {
-        return marketingPreferenceRepository.getDistinctByMarketingPreferenceIdEquals(marketingPreferenceId);
+    public MarketingPreferenceDetail findDistinctByMarketingPreferenceIdEquals(Long marketingPreferenceId) {
+        return marketingPreferenceRepository.findDistinctByMarketingPreferenceIdEquals(marketingPreferenceId);
     }
 
 }

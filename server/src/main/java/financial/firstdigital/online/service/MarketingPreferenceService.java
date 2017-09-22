@@ -12,5 +12,5 @@ import financial.firstdigital.online.model.MarketingPreferenceDetail;
 
 public interface MarketingPreferenceService {
     public void saveMarketingPreferenceDetail(MarketingPreferenceDetail marketingPreferenceDetail);
-    public MarketingPreferenceDetail getDistinctByMarketingPreferenceIdEquals(int marketingPreferenceId);
+    public MarketingPreferenceDetail findDistinctByMarketingPreferenceIdEquals(Long marketingPreferenceId);
 }

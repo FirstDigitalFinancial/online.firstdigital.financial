@@ -12,5 +12,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 
 public interface MarketingPreferenceRepository extends CrudRepository<MarketingPreferenceDetail, Long> {
-    public MarketingPreferenceDetail getDistinctByMarketingPreferenceIdEquals(int marketingPreferenceId);
+    public MarketingPreferenceDetail findDistinctByMarketingPreferenceIdEquals(Long marketingPreferenceId);
 }

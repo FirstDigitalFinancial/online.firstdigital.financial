@@ -5,6 +5,8 @@ import financial.firstdigital.online.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -13,6 +15,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static javax.servlet.http.HttpServletResponse.SC_CREATED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.TEXT_PLAIN;
 
@@ -205,7 +208,7 @@ public class RESTController {
 
     @RequestMapping(value = "/address/", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
     public @ResponseBody
-    GenericJsonResponse setAddressDetail(@RequestBody AddressDetail addressDetail) {
+    ResponseEntity<GenericJsonResponse> setAddressDetail(@RequestBody AddressDetail addressDetail) {
 
         logger.debug("Entering setAddressDetail");
 
@@ -222,14 +225,16 @@ public class RESTController {
         }
 
         GenericJsonResponse<AddressDetail> addressDetailJsonReponse = new GenericJsonResponse<AddressDetail>();
-        addressDetailJsonReponse.setStatus(200);
+        addressDetailJsonReponse.setStatus(SC_CREATED);
         addressDetailJsonReponse.setMessage("OK");
         addressDetailJsonReponse.setResult(Arrays.asList(
                 addressDetailService.findDistinctByHouseNumberEqualsAndPostCodeEquals(
                         addressDetail.getHouseNumber(),
                         addressDetail.getPostCode())));
 
-        return addressDetailJsonReponse;
+        ResponseEntity<GenericJsonResponse> responseResponseEntity = new ResponseEntity<GenericJsonResponse>(addressDetailJsonReponse, HttpStatus.CREATED);
+
+        return responseResponseEntity;
 
     }
 
@@ -243,6 +248,18 @@ public class RESTController {
         addressDetailJsonReponse.setResult(Arrays.asList(addressDetailService.findDistinctByAddressIdEquals(addressId)));
 
         return addressDetailJsonReponse;
+    }
+
+    @RequestMapping(value = "/marketing/{marketingPreferenceId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody
+    GenericJsonResponse getMarketingPreferenceDetail(@PathVariable Long marketingPreferenceId) {
+
+        logger.debug("Entering getMarketingPreferenceDetail");
+
+        GenericJsonResponse<MarketingPreferenceDetail> marketingPreferenceDetailJsonReponse = new GenericJsonResponse<MarketingPreferenceDetail>();
+        marketingPreferenceDetailJsonReponse.setResult(Arrays.asList(marketingPreferenceService.findDistinctByMarketingPreferenceIdEquals(marketingPreferenceId)));
+
+        return marketingPreferenceDetailJsonReponse;
     }
 
 }
