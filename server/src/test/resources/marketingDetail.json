@@ -1,0 +1,8 @@
+{
+  "byEmail": false,
+  "byPost": false,
+  "byPhone": false,
+  "byText": true,
+  "byApp": true,
+  "bySocial": true
+}

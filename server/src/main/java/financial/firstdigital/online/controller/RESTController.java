@@ -232,9 +232,9 @@ public class RESTController {
                         addressDetail.getHouseNumber(),
                         addressDetail.getPostCode())));
 
-        ResponseEntity<GenericJsonResponse> responseResponseEntity = new ResponseEntity<GenericJsonResponse>(addressDetailJsonReponse, HttpStatus.CREATED);
+        ResponseEntity<GenericJsonResponse> responseEntity = new ResponseEntity<GenericJsonResponse>(addressDetailJsonReponse, HttpStatus.CREATED);
 
-        return responseResponseEntity;
+        return responseEntity;
 
     }
 
@@ -248,6 +248,29 @@ public class RESTController {
         addressDetailJsonReponse.setResult(Arrays.asList(addressDetailService.findDistinctByAddressIdEquals(addressId)));
 
         return addressDetailJsonReponse;
+    }
+
+    @RequestMapping(value = "/marketing/", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    ResponseEntity<GenericJsonResponse> setMarketingPreferenceDetail(@RequestBody MarketingPreferenceDetail marketingPreferenceDetail) {
+
+        logger.debug("Entering setMarketingPreferenceDetail");
+
+        if (marketingPreferenceDetail != null ) {
+            marketingPreferenceService.saveMarketingPreferenceDetail(marketingPreferenceDetail);
+        }
+
+        GenericJsonResponse<MarketingPreferenceDetail> marketingPreferenceDetailJsonReponse = new GenericJsonResponse<MarketingPreferenceDetail>();
+        marketingPreferenceDetailJsonReponse.setStatus(SC_CREATED);
+        marketingPreferenceDetailJsonReponse.setMessage("OK");
+        marketingPreferenceDetailJsonReponse.setResult(Arrays.asList(
+                marketingPreferenceService.findDistinctByMarketingPreferenceIdEquals(
+                        marketingPreferenceDetail.getMarketingPreferenceId())));
+
+        ResponseEntity<GenericJsonResponse> responseEntity = new ResponseEntity<GenericJsonResponse>(marketingPreferenceDetailJsonReponse, HttpStatus.CREATED);
+
+        return responseEntity;
+
     }
 
     @RequestMapping(value = "/marketing/{marketingPreferenceId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
