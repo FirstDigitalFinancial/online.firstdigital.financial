@@ -29,6 +29,12 @@ public class LoginDetail {
     @Column(name = "masterPin")
     private int masterPin;
 
+    @Column(name = "loginAttempt")
+    private int loginAttempt;
+
+    @Column(name = "accountStatus")
+    private Boolean accountStatus;
+
     public Long getLoginId() {
         return loginId;
     }

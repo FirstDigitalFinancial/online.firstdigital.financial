@@ -1,5 +1,7 @@
 package financial.firstdigital.online.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -45,8 +47,10 @@ public class CustomerDetail {
     @JoinColumn(name="addressId")
     private AddressDetail addressDetail;
 
-    @Column(name = "emailAddress", length = 250)
-    private String emailAddress;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="fdf_customer_email_detail", joinColumns={@JoinColumn(name="customerId", referencedColumnName="customerId")}
+            , inverseJoinColumns={@JoinColumn(name="emailId", referencedColumnName="emailId")})
+    private Set<EmailDetail> emailDetailSet;
 
     @OneToMany(cascade=CascadeType.ALL)
     @JoinTable(name="fdf_customer_account_detail", joinColumns={@JoinColumn(name="customerId", referencedColumnName="customerId")}
@@ -113,12 +117,12 @@ public class CustomerDetail {
         this.addressDetail = addressDetail;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public Set<EmailDetail> getEmailDetailSet() {
+        return emailDetailSet;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmailDetail(Set<EmailDetail> emailDetailSet) {
+        this.emailDetailSet = emailDetailSet;
     }
 
     public Set<AccountDetail> getAccountDetailSet() { return accountDetailSet; }
@@ -153,7 +157,7 @@ public class CustomerDetail {
                 ", otherNames='" + otherNames + '\'' +
                 ", gender=" + gender +
                 ", addressDetail=" + addressDetail +
-                ", emailAddress='" + emailAddress + '\'' +
+                ", emailDetailSet='" + emailDetailSet + '\'' +
                 ", accountDetailSet=" + accountDetailSet +
                 ", marketingPreferenceDetail=" + marketingPreferenceDetail +
 //                ", loginDetail=" + loginDetail +

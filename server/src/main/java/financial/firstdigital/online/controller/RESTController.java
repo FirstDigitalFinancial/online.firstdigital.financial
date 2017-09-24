@@ -1,5 +1,6 @@
 package financial.firstdigital.online.controller;
 
+import com.sun.org.apache.regexp.internal.RE;
 import financial.firstdigital.online.model.*;
 import financial.firstdigital.online.service.*;
 import org.slf4j.Logger;
@@ -16,8 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static javax.servlet.http.HttpServletResponse.SC_CREATED;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.TEXT_PLAIN;
+import static org.springframework.http.MediaType.*;
 
 /**
  * The RESTController is the main controller where all the APIs are
@@ -32,7 +32,8 @@ import static org.springframework.http.MediaType.TEXT_PLAIN;
 @RequestMapping("/")
 public class RESTController {
 
-    private Clock clock = Clock.systemDefaultZone();;
+    private Clock clock = Clock.systemDefaultZone();
+    ;
 
     private static final Logger logger =
             LoggerFactory.getLogger(RESTController.class);
@@ -45,6 +46,7 @@ public class RESTController {
     TownService townService;
     TitleService titleService;
     MarketingPreferenceService marketingPreferenceService;
+    EmailDetailService emailDetailService;
 
     @Autowired
     public void setAccountDetailService(AccountDetailService accountDetailService) {
@@ -77,18 +79,26 @@ public class RESTController {
     }
 
     @Autowired
-    public void setTitleService(TitleService titleService) { this.titleService = titleService; }
+    public void setTitleService(TitleService titleService) {
+        this.titleService = titleService;
+    }
 
     @Autowired
     public void setMarketingPreferenceService(MarketingPreferenceService marketingPreferenceService) {
         this.marketingPreferenceService = marketingPreferenceService;
     }
 
+    @Autowired
+    public void setEmailDetailService(EmailDetailService emailDetailService) {
+        this.emailDetailService = emailDetailService;
+    }
+
     /**
      * Gets the Ping json for the controller.
+     *
      * @return GenericJsonResponse.
      */
-    @RequestMapping(value = "/ping", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/ping", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public @ResponseBody
     GenericJsonResponse getPing() {
 
@@ -106,7 +116,7 @@ public class RESTController {
         return (pingJsonResponse);
     }
 
-    @RequestMapping(value = "/account/{accountId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/account/{accountId}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public @ResponseBody
     GenericJsonResponse getAccountDetail(@PathVariable Long accountId) {
 
@@ -118,7 +128,7 @@ public class RESTController {
         return accountDetailJsonReponse;
     }
 
-    @RequestMapping(value = "/transaction/{transactionId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/transaction/{transactionId}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public @ResponseBody
     GenericJsonResponse getTransactionDetail(@PathVariable Long transactionId) {
 
@@ -141,7 +151,7 @@ public class RESTController {
 
     }
 
-    @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public @ResponseBody
     GenericJsonResponse getCustomerDetail(@PathVariable Long customerId) {
 
@@ -168,7 +178,16 @@ public class RESTController {
         customerDetail.setLastName("McCall");
         customerDetail.setOtherNames("Edward");
         customerDetail.setGender(Gender.MALE);
-        customerDetail.setEmailAddress("andy.mccall@gmail.com");
+
+        EmailDetail emailDetail = new EmailDetail();
+        emailDetail.setEmailAddress("andy.mccall@gmail.com");
+        emailDetail.setEmailType(EmailType.PRIMARY);
+        emailDetail.setVerified(true);
+
+        Set<EmailDetail> emailDetailSet = new HashSet<EmailDetail>();
+        emailDetailSet.add(emailDetail);
+
+        customerDetail.setEmailDetail(emailDetailSet);
 
         AccountDetail accountDetail = new AccountDetail();
         accountDetail.setStatus(AccountStatus.OPEN);
@@ -220,7 +239,7 @@ public class RESTController {
         newAddressDetail1.setTown(newTown);
         newAddressDetail1.setCounty(newCounty);
 
-        if (addressDetail != null ) {
+        if (addressDetail != null) {
             addressDetailService.saveAddressDetail(newAddressDetail1);
         }
 
@@ -238,7 +257,7 @@ public class RESTController {
 
     }
 
-    @RequestMapping(value = "/address/{addressId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/address/{addressId}", method = RequestMethod.GET, produces = APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
     GenericJsonResponse getAddressDetail(@PathVariable Long addressId) {
 
@@ -256,7 +275,7 @@ public class RESTController {
 
         logger.debug("Entering setMarketingPreferenceDetail");
 
-        if (marketingPreferenceDetail != null ) {
+        if (marketingPreferenceDetail != null) {
             marketingPreferenceService.saveMarketingPreferenceDetail(marketingPreferenceDetail);
         }
 
@@ -273,7 +292,7 @@ public class RESTController {
 
     }
 
-    @RequestMapping(value = "/marketing/{marketingPreferenceId}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/marketing/{marketingPreferenceId}", method = RequestMethod.GET, produces = APPLICATION_JSON_UTF8_VALUE)
     public @ResponseBody
     GenericJsonResponse getMarketingPreferenceDetail(@PathVariable Long marketingPreferenceId) {
 
@@ -285,5 +304,37 @@ public class RESTController {
         return marketingPreferenceDetailJsonReponse;
     }
 
-}
+    @RequestMapping(value = "/email/{emailId}", method = RequestMethod.GET, produces = APPLICATION_JSON_UTF8_VALUE)
+    public @ResponseBody
+    GenericJsonResponse getEmailDetail(@PathVariable Long emailId) {
 
+        logger.debug("Entering getEmailDetail");
+
+        GenericJsonResponse<EmailDetail> emailDetailGenericJsonResponse = new GenericJsonResponse<EmailDetail>();
+        emailDetailGenericJsonResponse.setResult(Arrays.asList(emailDetailService.findDistinctByEmailIdEquals(emailId)));
+
+        return emailDetailGenericJsonResponse;
+
+    }
+
+    @RequestMapping(value = "/email/", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    ResponseEntity<GenericJsonResponse> setEmailDetail(@RequestBody EmailDetail emailDetail) {
+
+        logger.debug("Entering setMarketingPreferenceDetail");
+
+        if (emailDetail != null) {
+            emailDetailService.saveEmailDetail(emailDetail);
+        }
+
+        GenericJsonResponse<EmailDetail> emailDetailJsonResponse = new GenericJsonResponse<EmailDetail>();
+        emailDetailJsonResponse.setStatus(SC_CREATED);
+        emailDetailJsonResponse.setMessage("OK");
+        emailDetailJsonResponse.setResult(Arrays.asList(emailDetailService.findDistinctByEmailAddressEquals(emailDetail.getEmailAddress())));
+
+        ResponseEntity<GenericJsonResponse> responseEntity = new ResponseEntity<GenericJsonResponse>(emailDetailJsonResponse, HttpStatus.CREATED);
+
+        return responseEntity;
+    }
+
+}
