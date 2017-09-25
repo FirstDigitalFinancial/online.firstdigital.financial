@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Set;
 
 /**
  * The AddressDetailServiceImpl class
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-17
  */
 
@@ -27,8 +28,8 @@ public class AddressDetailServiceImpl implements AddressDetailService {
         return addressDetailRepository.findDistinctByAddressIdEquals(addressId);
     }
 
-    public void saveAddressDetail(AddressDetail addressDetail) {
-        addressDetailRepository.save(addressDetail);
+    public void saveAddressDetailSet(Set<AddressDetail> addressDetailSet) {
+        addressDetailRepository.save(addressDetailSet);
     }
 
     public AddressDetail findDistinctByHouseNumberEqualsAndPostCodeEquals(int houseNumber, String postCode) {

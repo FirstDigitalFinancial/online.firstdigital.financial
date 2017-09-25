@@ -2,17 +2,19 @@ package financial.firstdigital.online.service;
 
 import financial.firstdigital.online.model.AddressDetail;
 
+import java.util.Set;
+
 /**
  * The AddressDetailService interface
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-17
  */
 
 public interface AddressDetailService {
 
-    public void saveAddressDetail(AddressDetail addressDetail);
+    public void saveAddressDetailSet(Set<AddressDetail> addressDetailSet);
     public AddressDetail findDistinctByAddressIdEquals(Long addressId);
     public AddressDetail findDistinctByHouseNumberEqualsAndPostCodeEquals(int houseNumber, String postCode);
 

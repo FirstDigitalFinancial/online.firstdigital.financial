@@ -1,0 +1,12 @@
+{
+  "houseNumber": 95,
+  "houseName" : "Torrington",
+  "streetName": "Newton Drive",
+  "town": {
+    "townName": "Blackpool"
+  },
+  "county": {
+    "countyName": "Lancashire"
+  },
+  "postCode": "FY3 8LX"
+}

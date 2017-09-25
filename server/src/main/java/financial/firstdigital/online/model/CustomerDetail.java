@@ -43,9 +43,10 @@ public class CustomerDetail {
     @Column(name = "gender")
     private Gender gender;
 
-    @ManyToOne
-    @JoinColumn(name="addressId")
-    private AddressDetail addressDetail;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="fdf_customer_address_detail", joinColumns={@JoinColumn(name="customerId", referencedColumnName="customerId")}
+            , inverseJoinColumns={@JoinColumn(name="addressId", referencedColumnName="addressId")})
+    private Set<AddressDetail> addressDetailSet;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name="fdf_customer_email_detail", joinColumns={@JoinColumn(name="customerId", referencedColumnName="customerId")}
@@ -58,7 +59,7 @@ public class CustomerDetail {
     private Set<AccountDetail> accountDetailSet;
 
     @OneToOne
-    @JoinColumn(name="marketingPreferenceId")
+    @JoinColumn(name="customerId", referencedColumnName = "marketingPreferenceId", nullable = true)
     private MarketingPreferenceDetail marketingPreferenceDetail;
 
 //    @OneToOne
@@ -109,12 +110,12 @@ public class CustomerDetail {
         this.gender = gender;
     }
 
-    public AddressDetail getAddressDetail() {
-        return addressDetail;
+    public Set<AddressDetail> getAddressDetailSet() {
+        return addressDetailSet;
     }
 
-    public void setAddressDetail(AddressDetail addressDetail) {
-        this.addressDetail = addressDetail;
+    public void setAddressDetailSet(Set<AddressDetail> addressDetailSet) {
+        this.addressDetailSet = addressDetailSet;
     }
 
     public Set<EmailDetail> getEmailDetailSet() {
@@ -156,7 +157,7 @@ public class CustomerDetail {
                 ", lastName='" + lastName + '\'' +
                 ", otherNames='" + otherNames + '\'' +
                 ", gender=" + gender +
-                ", addressDetail=" + addressDetail +
+                ", addressDetailSet=" + addressDetailSet +
                 ", emailDetailSet='" + emailDetailSet + '\'' +
                 ", accountDetailSet=" + accountDetailSet +
                 ", marketingPreferenceDetail=" + marketingPreferenceDetail +

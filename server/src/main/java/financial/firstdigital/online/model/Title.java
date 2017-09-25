@@ -30,10 +30,6 @@ public class Title {
         return titleId;
     }
 
-    public void setTitleId(int titleId) {
-        this.titleId = titleId;
-    }
-
     public String getTitle() {
         return title;
     }

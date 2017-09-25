@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
  * The TitleServiceImpl class
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-17
  */
 
@@ -26,4 +26,11 @@ public class TitleServiceImpl implements TitleService {
     public Title findDistinctByTitleIdEquals(int titleId) {
         return titleDetailRepository.findDistinctByTitleIdEquals(titleId);
     }
+
+    @Override
+    public Title findDistinctByTitleEquals(String title) {
+        return titleDetailRepository.findDistinctByTitleEquals(title);
+    }
+
+
 }

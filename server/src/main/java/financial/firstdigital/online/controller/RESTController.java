@@ -1,6 +1,5 @@
 package financial.firstdigital.online.controller;
 
-import com.sun.org.apache.regexp.internal.RE;
 import financial.firstdigital.online.model.*;
 import financial.firstdigital.online.service.*;
 import org.slf4j.Logger;
@@ -167,12 +166,14 @@ public class RESTController {
         addressDetail.setTown(town);
         addressDetail.setCounty(county);
         addressDetail.setPostCode("FY3 8LX");
-        addressDetailService.saveAddressDetail(addressDetail);
+
+        Set<AddressDetail> addressDetailSet = new HashSet<AddressDetail>();
+        addressDetailSet.add(addressDetail);
 
         Title title = titleService.findDistinctByTitleIdEquals(1);
 
         CustomerDetail customerDetail = new CustomerDetail();
-        customerDetail.setAddressDetail(addressDetail);
+        customerDetail.setAddressDetailSet(addressDetailSet);
         customerDetail.setTitle(title);
         customerDetail.setFirstName("Andy");
         customerDetail.setLastName("McCall");
@@ -225,22 +226,55 @@ public class RESTController {
 
     }
 
-    @RequestMapping(value = "/address/", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/customer/", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
     public @ResponseBody
-    ResponseEntity<GenericJsonResponse> setAddressDetail(@RequestBody AddressDetail addressDetail) {
+    ResponseEntity<GenericJsonResponse> setCustomerDetail(@RequestBody CustomerDetail customerDetail) {
+
+        logger.debug("Entering setCustomerDetail");
+
+        if (customerDetail != null) {
+
+            Title title = titleService.findDistinctByTitleEquals(customerDetail.getTitle().getTitle());
+
+            CustomerDetail newCustomerDetail = customerDetail;
+
+            newCustomerDetail.setTitle(title);
+
+            System.out.println(customerDetail);
+
+            customerDetailService.saveCustomerDetail(customerDetail);
+        }
+
+        GenericJsonResponse<CustomerDetail> customerDetailJsonReponse = new GenericJsonResponse<CustomerDetail>();
+        customerDetailJsonReponse.setStatus(SC_CREATED);
+        customerDetailJsonReponse.setMessage("OK");
+        customerDetailJsonReponse.setResult(Arrays.asList(customerDetailService.findDistinctByCustomerIdEquals(customerDetail.getCustomerId())));
+
+        ResponseEntity<GenericJsonResponse> responseEntity = new ResponseEntity<GenericJsonResponse>(customerDetailJsonReponse, HttpStatus.CREATED);
+
+        return responseEntity;
+    }
+
+    @RequestMapping(value = "/customer/{customerId}/address/", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    ResponseEntity<GenericJsonResponse> setAddressDetail(@PathVariable Long customerId,
+                                                         @RequestBody AddressDetail addressDetail) {
 
         logger.debug("Entering setAddressDetail");
 
-        Town newTown = townService.findDistinctByTownNameEquals(addressDetail.getTown().getTownName());
-        County newCounty = countyService.findDistinctByCountyNameEquals(addressDetail.getCounty().getCountyName());
-
-        AddressDetail newAddressDetail1 = addressDetail;
-
-        newAddressDetail1.setTown(newTown);
-        newAddressDetail1.setCounty(newCounty);
-
         if (addressDetail != null) {
-            addressDetailService.saveAddressDetail(newAddressDetail1);
+
+            Town newTown = townService.findDistinctByTownNameEquals(addressDetail.getTown().getTownName());
+            County newCounty = countyService.findDistinctByCountyNameEquals(addressDetail.getCounty().getCountyName());
+
+            AddressDetail newAddressDetail = addressDetail;
+
+            newAddressDetail.setTown(newTown);
+            newAddressDetail.setCounty(newCounty);
+
+            CustomerDetail customerDetail = customerDetailService.findDistinctByCustomerIdEquals(customerId);
+            customerDetail.getAddressDetailSet().add(newAddressDetail);
+            customerDetailService.saveCustomerDetail(customerDetail);
         }
 
         GenericJsonResponse<AddressDetail> addressDetailJsonReponse = new GenericJsonResponse<AddressDetail>();
@@ -317,14 +351,17 @@ public class RESTController {
 
     }
 
-    @RequestMapping(value = "/email/", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/customer/{customerId}/email/", method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE)
     public @ResponseBody
-    ResponseEntity<GenericJsonResponse> setEmailDetail(@RequestBody EmailDetail emailDetail) {
+    ResponseEntity<GenericJsonResponse> setEmailDetail( @PathVariable Long customerId,
+                                                        @RequestBody EmailDetail emailDetail) {
 
-        logger.debug("Entering setMarketingPreferenceDetail");
+        logger.debug("Entering setEmailDetail");
 
         if (emailDetail != null) {
-            emailDetailService.saveEmailDetail(emailDetail);
+            CustomerDetail customerDetail = customerDetailService.findDistinctByCustomerIdEquals(customerId);
+            customerDetail.getEmailDetailSet().add(emailDetail);
+            customerDetailService.saveCustomerDetail(customerDetail);
         }
 
         GenericJsonResponse<EmailDetail> emailDetailJsonResponse = new GenericJsonResponse<EmailDetail>();
