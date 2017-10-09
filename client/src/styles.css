@@ -1,71 +1,84 @@
-.site-header .site-title-wrapper {
-  float: left;
-  margin: 18px 20px; }
-@media only screen and (max-width: 40em) {
-  .site-header .site-title-wrapper {
-    max-width: 70%; } }
+/* You can add global styles to this file, and also import other style files */
+html *
+{
+  font-family: sans-serif !important;
+}
 
-.site-title {
-  font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
-  font-size: 1.5rem;
+.navbar-nav {
+  margin-top: 50px;
+}
+
+.nav-link {
+  font-family: sans-serif !important;
+  font-size: 16px;
+  text-align: right;
+  color: #104869;
   font-weight: bold;
-  color: #194F6E;
-  letter-spacing: -1px;
-  line-height: 1;
-  margin-bottom: 0; }
-.site-title a {
-  color: #194F6E; }
-@media only screen and (min-width: 40.063em) {
-  .site-title {
-    font-size: 1.75rem;
-    font-size: 1.75rem;
-    letter-spacing: -1.8px; } }
-@media only screen and (min-width: 61.063em) {
-  .site-title {
-    font-size: 2.375rem;
-    font-size: 2.375rem;
-    letter-spacing: -2px; } }
+  margin-right: 20px;
+}
 
-.site-header .custom-logo {
-  width: auto;
-  max-height: 40px; }
-@media only screen and (min-width: 40.063em) {
-  .site-header .custom-logo {
-    max-height: 52px; } }
-@media only screen and (min-width: 61.063em) {
-  .site-header .custom-logo {
-    max-height: 62px; } }
+.navbar-logo {
+  margin-right: 150px;
+}
 
-.site-description {
-  font-size: 9px;
-  color: #545454;
-  font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  text-transform: uppercase; }
-@media only screen and (min-width: 61.063em) {
-  .site-description {
-    font-size: 0.6875rem;
-    font-size: 0.6875rem;
-    letter-spacing: 1px; } }
+h1 {
+  color: #00bfff;
+  font-weight: bold;
+  font-size: 24px;
+}
 
-.site-header {
-  letter-spacing: -.01em;
-  padding: 0;
-  min-height: 75px; }
-@media only screen and (min-width: 40.063em) {
-  .site-header {
-    padding: 17px 0;
-    position: inherit; } }
-@media only screen and (min-width: 61.063em) {
-  .site-header {
-    padding: 32px 0;
-    min-height: 121px; } }
+h2.jumbo-head {
+  font-family: sans-serif !important;
+  color: #ffffff;
+  text-align: right;
+  font-size: 56px;
+}
 
-.site-header-wrapper {
-  float: none; }
-@media only screen and (max-width: 40em) {
-  .site-header-wrapper {
-    padding-left: 0;
-    margin-left: 0;
-    padding-right: 0;
-    margin-right: 0; } }
+p.jumbo-subhead {
+  font-family: sans-serif !important;
+  color: #ffffff;
+  text-align: right;
+  font-size: 42px;
+}
+
+p.jumbo-button {
+  font-family: sans-serif !important;
+  color: #ffffff;
+  text-align: right;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 17.5;
+}
+
+h3 {
+  color: #00bfff;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.jumbotron {
+  background-image: url("assets/jumbotron.jpg");
+  filter: brightness(50%);
+  margin-bottom: 50px;
+  margin-top: 50px;
+  min-height: 520px;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+
+.message {
+  margin-top: 100px;
+}
+
+.product {
+  margin-top: 100px;
+}
+
+.learn-more {
+  color: #00bfff;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 50px;
+}

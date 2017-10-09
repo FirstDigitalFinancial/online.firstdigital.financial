@@ -1,20 +1,12 @@
-<div class="site-title-wrapper">
-  <h1 class="site-title"><a href="http://firstdigital.financial/" rel="home">First Digital Financial</a></h1>
-  <div class="site-description">Making digital finance easy</div>
-</div><!-- .site-title-wrapper -->
-
-<nav id="site-navigation" class="main-navigation">
-
-<div class="menu-primary-menu-container">
- <nav>
-  <a routerLink="/homepage" routerLinkActive="active">Home</a>
-  <a routerLink="/about" routerLinkActive="active">About Us</a>
-  <a routerLink="/services" routerLinkActive="active">Services</a>
-  <!--<a routerLink="/blog" routerLinkActive="active">Blog</a>-->
-  <!--<a routerLink="/contact-us" routerLinkActive="Conact Us">Home</a>-->
-  <!--<a routerLink="/faq" routerLinkActive="active">FAQ</a>-->
-  <!--<a routerLink="/login" routerLinkActive="active">Login</a>-->
-</nav>
-<router-outlet></router-outlet>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <app-navigation></app-navigation>
+    <app-jumbo></app-jumbo>
+    <app-products></app-products>
+    <app-message></app-message>
+  </div>
+  <div class="col-sm-2"></div>
 </div>
-</nav>
+<hr>
+<app-footer></app-footer>
