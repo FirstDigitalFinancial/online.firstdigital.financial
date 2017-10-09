@@ -234,13 +234,10 @@ public class RESTController {
 
         if (customerDetail != null) {
 
-            Title title = titleService.findDistinctByTitleEquals(customerDetail.getTitle().getTitle());
-
             CustomerDetail newCustomerDetail = customerDetail;
 
+            Title title = titleService.findDistinctByTitleEquals(customerDetail.getTitle().getTitle());
             newCustomerDetail.setTitle(title);
-
-            System.out.println(customerDetail);
 
             customerDetailService.saveCustomerDetail(customerDetail);
         }
