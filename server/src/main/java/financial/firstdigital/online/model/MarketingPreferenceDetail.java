@@ -38,6 +38,31 @@ public class MarketingPreferenceDetail {
     @Column(name = "social")
     Boolean bySocial;
 
+    public MarketingPreferenceDetail() {
+        this.byEmail = false;
+        this.byPost = false;
+        this.byPhone = false;
+        this.byText = false;
+        this.byApp = false;
+        this.bySocial = false;
+    }
+
+    public MarketingPreferenceDetail(Long marketingPreferenceId,
+                                     Boolean byEmail,
+                                     Boolean byPost,
+                                     Boolean byPhone,
+                                     Boolean byText,
+                                     Boolean byApp,
+                                     Boolean bySocial) {
+        this.marketingPreferenceId = marketingPreferenceId;
+        this.byEmail = byEmail;
+        this.byPost = byPost;
+        this.byPhone = byPhone;
+        this.byText = byText;
+        this.byApp = byApp;
+        this.bySocial = bySocial;
+    }
+
     public Long getMarketingPreferenceId() {
         return marketingPreferenceId;
     }
