@@ -25,6 +25,13 @@ public class Title {
     @Column(name = "title", length = 13)
     private String title;
 
+    public Title() {}
+
+    public Title(int titleId, String title) {
+        this.titleId = titleId;
+        this.title = title;
+    }
+
     @JsonIgnore
     public int getTitleId() {
         return titleId;

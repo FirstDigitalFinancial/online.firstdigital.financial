@@ -9,7 +9,7 @@ import javax.persistence.*;
  * about Towns in the UK
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-17
  */
 
@@ -24,6 +24,13 @@ public class Town {
 
     @Column(name = "townName")
     private String townName;
+
+    public Town() {}
+
+    public Town(int townId, String townName) {
+        this.townId = townId;
+        this.townName = townName;
+    }
 
     public int getTownId() {
         return townId;
