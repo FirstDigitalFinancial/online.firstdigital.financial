@@ -1,18 +1,13 @@
 package financial.firstdigital.online.model;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * The PingTest class is a test class that tests Ping.

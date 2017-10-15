@@ -97,7 +97,7 @@
     <build>
         <resources>
             <resource>
-                <directory>${basedir}/server/src/resources</directory>
+                <directory>src/resources</directory>
             </resource>
         </resources>
         <plugins>
@@ -107,11 +107,8 @@
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
+                <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.8</version>
-                <configuration>
-                <dataFile>${basedir}/target/jacoco.exec</dataFile>
-                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-integration-tests</id>
