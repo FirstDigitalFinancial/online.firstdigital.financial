@@ -39,7 +39,7 @@ public class PingTest {
         Clock mockClock =
                 Clock.fixed(
                         LocalDateTime.of(year, month, day, hour, minute, second).toInstant(OffsetDateTime.now().getOffset()),
-                        Clock.systemDefaultZone().getZone());
+                        Clock.systemUTC().getZone());
 
         testPing = new Ping(mockClock);
 
@@ -60,7 +60,7 @@ public class PingTest {
     @Test
     public void toString_StringReturned_Passes() throws Exception {
          Assert.assertEquals( "toString() has failed",
-                "Ping{response=pong, date=2017-02-03, time=22:11:00}", testPing.toString());
+                "Ping{response=pong, date=2017-02-03, time=21:11:00}", testPing.toString());
     }
 
 }
