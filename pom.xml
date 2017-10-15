@@ -95,6 +95,7 @@
     </dependencies>
 
     <build>
+        <testSourceDirectory>${basedir}/server/src/test</testSourceDirectory>
         <resources>
             <resource>
                 <directory>${basedir}/server/src/resources</directory>
