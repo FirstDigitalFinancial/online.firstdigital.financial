@@ -25,7 +25,7 @@ public class PingTest {
     private int month = 2;
     private int day = 3;
 
-    private int hour = 22;
+    private int hour = 21;
     private int minute = 11;
     private int second = 00;
 
