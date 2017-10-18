@@ -33,13 +33,13 @@ public class CustomerDetailTest {
         Town town = new Town(1,"Blackpool");
         County county = new County(1,"Lancashire");
 
-        AddressDetail addressDetail = new AddressDetail();
-        addressDetail.setHouseNumber(95);
-        addressDetail.setHouseName("Torrington");
-        addressDetail.setStreetName("Newton Drive");
-        addressDetail.setTown(town);
-        addressDetail.setCounty(county);
-        addressDetail.setPostCode("FY3 8LX");
+        AddressDetail addressDetail = new AddressDetail(Long.valueOf(1),
+                                                        95,
+                                                        "Torrington",
+                                                        "Newton Drive",
+                                                        town,
+                                                        county,
+                                                        "FY3 8LX");
 
         Set<AddressDetail> addressDetailSet = new HashSet<AddressDetail>();
         addressDetailSet.add(addressDetail);
@@ -228,8 +228,9 @@ public class CustomerDetailTest {
 
     @Test
     public void toString_StringReturned_Passes() throws Exception {
-        Assert.assertEquals(customerDetailUnderTest.toString(),
-                "CustomerDetail{customerId=1, title=Title{titleId=1, title='Mr'}, firstName='Andy', lastName='McCall', otherNames='Edward', gender=MALE, addressDetailSet=[AddressDetail{addressId=null, houseNumber=95, houseName='Torrington', streetName='Newton Drive', town=town{townId=1, townName='Blackpool'}, county=County{countyId=1, countyName='Lancashire'}, postCode='FY3 8LX'}], emailDetailSet='[EmailDetail{emailId=null, emailAddress='test@firstdigital.financial', emailType=PRIMARY, isVerified=true}]', accountDetailSet=[AccountDetail{accountId=null, address='1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', currency=BITCOIN_CORE, status=OPEN}], marketingPreferenceDetail=MarketingPreferenceDetail{marketingPreferenceId=null, byEmail=true, byPost=true, byPhone=false, byText=false, byApp=false, bySocial=true}}");
+        Assert.assertEquals("CustomerDetail.toString() has failed",
+                "CustomerDetail{customerId=1, title=Title{titleId=1, title='Mr'}, firstName='Andy', lastName='McCall', otherNames='Edward', gender=MALE, addressDetailSet=[AddressDetail{addressId=1, houseNumber=95, houseName='Torrington', streetName='Newton Drive', town=town{townId=1, townName='Blackpool'}, county=County{countyId=1, countyName='Lancashire'}, postCode='FY3 8LX'}], emailDetailSet='[EmailDetail{emailId=null, emailAddress='test@firstdigital.financial', emailType=PRIMARY, isVerified=true}]', accountDetailSet=[AccountDetail{accountId=null, address='1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', currency=BITCOIN_CORE, status=OPEN}], marketingPreferenceDetail=MarketingPreferenceDetail{marketingPreferenceId=null, byEmail=true, byPost=true, byPhone=false, byText=false, byApp=false, bySocial=true}}",
+                customerDetailUnderTest.toString());
     }
 
 }
