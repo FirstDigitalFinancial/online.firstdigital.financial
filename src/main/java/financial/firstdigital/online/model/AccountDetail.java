@@ -31,6 +31,17 @@ public class AccountDetail {
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
+    public AccountDetail() {
+
+    }
+
+    public AccountDetail(Long accountId, String address, Currency currency, AccountStatus accountStatus) {
+        this.accountId = accountId;
+        this.address = address;
+        this.currency = currency;
+        this.status = accountStatus;
+    }
+
     public Long getAccountId() {
         return accountId;
     }
