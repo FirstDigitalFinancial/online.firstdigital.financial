@@ -8,7 +8,6 @@ package financial.firstdigital.online.model;
  * @version 0.1
  * @since   2017-09-16
  */
-
 public enum Gender {
     UNKNOWN("U"),
     MALE("M"),

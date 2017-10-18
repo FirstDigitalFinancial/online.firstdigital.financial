@@ -22,7 +22,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <start-class>financial.firstdigital.online.Application</start-class>
-        <argLine>-Duser.timezone=UTC</argLine>
     </properties>
 
     <dependencies>
