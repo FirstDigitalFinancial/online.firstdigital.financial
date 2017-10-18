@@ -7,10 +7,9 @@ import javax.persistence.*;
  * about the customers login details
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-20
  */
-
 @Entity
 @Table(name = "fdf_login_detail")
 public class LoginDetail {
@@ -34,6 +33,19 @@ public class LoginDetail {
 
     @Column(name = "accountStatus")
     private Boolean accountStatus;
+
+    public LoginDetail() {
+
+    }
+
+    public LoginDetail(Long loginId, String userName, String password, int masterPin, int loginAttempt, Boolean accountStatus) {
+        this.loginId = loginId;
+        this.userName = userName;
+        this.password = password;
+        this.masterPin = masterPin;
+        this.loginAttempt = loginAttempt;
+        this.accountStatus = accountStatus;
+    }
 
     public Long getLoginId() {
         return loginId;
@@ -70,6 +82,8 @@ public class LoginDetail {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", masterPin=" + masterPin +
+                ", loginAttempt=" + loginAttempt +
+                ", accountStatus=" + accountStatus +
                 '}';
     }
 }

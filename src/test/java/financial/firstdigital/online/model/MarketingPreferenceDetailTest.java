@@ -31,7 +31,8 @@ public class MarketingPreferenceDetailTest {
      */
     @Test
     public void getMarketingPreferenceId_MarketingPreferenceIdIsGot_Passes() throws Exception {
-        Assert.assertEquals(1,1);
+        Assert.assertEquals("MarketingPreferenceDetail.getMarketingPreferenceId() has failed",
+                Long.valueOf(1),marketingPreferenceDetailUnderTest.getMarketingPreferenceId());
     }
 
     /**
@@ -39,7 +40,8 @@ public class MarketingPreferenceDetailTest {
      */
     @Test
     public void getByEmail_byEmailGot_Passes() throws Exception {
-        Assert.assertEquals("getByEmail() has failed", true, marketingPreferenceDetailUnderTest.getByEmail());
+        Assert.assertEquals("MarketingPreferenceDetail.getByEmail() has failed",
+                true, marketingPreferenceDetailUnderTest.getByEmail());
     }
 
     /**
@@ -48,7 +50,8 @@ public class MarketingPreferenceDetailTest {
     @Test
     public void setByEmail_byEmailSet_Passes() throws Exception {
         marketingPreferenceDetailUnderTest.setByEmail(testValue);
-        Assert.assertEquals("setByEmail() has failed", testValue, marketingPreferenceDetailUnderTest.getByEmail());
+        Assert.assertEquals("MarketingPreferenceDetail.setByEmail() has failed",
+                testValue, marketingPreferenceDetailUnderTest.getByEmail());
     }
 
     /**
@@ -56,7 +59,8 @@ public class MarketingPreferenceDetailTest {
      */
     @Test
     public void getByPost_byPostGot_Passes() throws Exception {
-        Assert.assertEquals("getByPost() has failed", true, marketingPreferenceDetailUnderTest.getByPost());
+        Assert.assertEquals("MarketingPreferenceDetail.getByPost() has failed",
+                true, marketingPreferenceDetailUnderTest.getByPost());
     }
 
     /**
@@ -65,7 +69,8 @@ public class MarketingPreferenceDetailTest {
     @Test
     public void setByPost_byPostSet_Passes() throws Exception {
         marketingPreferenceDetailUnderTest.setByPost(testValue);
-        Assert.assertEquals("setByPost() has failed", testValue, marketingPreferenceDetailUnderTest.getByPost());
+        Assert.assertEquals("MarketingPreferenceDetail.setByPost() has failed",
+                testValue, marketingPreferenceDetailUnderTest.getByPost());
     }
 
     /**
@@ -73,7 +78,8 @@ public class MarketingPreferenceDetailTest {
      */
     @Test
     public void getByPhone_byPhoneGot_Passes() throws Exception {
-        Assert.assertEquals("getByPhone() has failed", true, marketingPreferenceDetailUnderTest.getByPhone());
+        Assert.assertEquals("MarketingPreferenceDetail.getByPhone() has failed",
+                true, marketingPreferenceDetailUnderTest.getByPhone());
     }
 
     /**
@@ -82,7 +88,8 @@ public class MarketingPreferenceDetailTest {
     @Test
     public void setByPhone_byPhoneSet_Passes() throws Exception {
         marketingPreferenceDetailUnderTest.setByPhone(testValue);
-        Assert.assertEquals("setByPhone() has failed", testValue, marketingPreferenceDetailUnderTest.getByPhone());
+        Assert.assertEquals("MarketingPreferenceDetail.setByPhone() has failed",
+                testValue, marketingPreferenceDetailUnderTest.getByPhone());
     }
 
     /**
@@ -90,7 +97,8 @@ public class MarketingPreferenceDetailTest {
      */
     @Test
     public void getByText_byTextGot_Passes() throws Exception {
-        Assert.assertEquals("getByText() has failed", true, marketingPreferenceDetailUnderTest.getByText());
+        Assert.assertEquals("MarketingPreferenceDetail.getByText() has failed",
+                true, marketingPreferenceDetailUnderTest.getByText());
     }
 
     /**
@@ -99,7 +107,8 @@ public class MarketingPreferenceDetailTest {
     @Test
     public void setByText_byTextSet_Passes() throws Exception {
         marketingPreferenceDetailUnderTest.setByText(testValue);
-        Assert.assertEquals("getByText() has failed", testValue, marketingPreferenceDetailUnderTest.getByText());
+        Assert.assertEquals("MarketingPreferenceDetail.getByText() has failed",
+                testValue, marketingPreferenceDetailUnderTest.getByText());
     }
 
     /**
@@ -107,7 +116,8 @@ public class MarketingPreferenceDetailTest {
      */
     @Test
     public void getByApp_byAppGot_Passes() throws Exception {
-        Assert.assertEquals("getByApp() has failed", true, marketingPreferenceDetailUnderTest.getByApp());
+        Assert.assertEquals("MarketingPreferenceDetail.getByApp() has failed",
+                true, marketingPreferenceDetailUnderTest.getByApp());
     }
 
     /**
@@ -116,7 +126,8 @@ public class MarketingPreferenceDetailTest {
     @Test
     public void setByApp_byAppSet_Passes() throws Exception {
         marketingPreferenceDetailUnderTest.setByApp(testValue);
-        Assert.assertEquals("getByApp() has failed", testValue, marketingPreferenceDetailUnderTest.getByApp());
+        Assert.assertEquals("MarketingPreferenceDetail.getByApp() has failed",
+                testValue, marketingPreferenceDetailUnderTest.getByApp());
     }
 
     /**
@@ -124,7 +135,8 @@ public class MarketingPreferenceDetailTest {
      */
     @Test
     public void getBySocial_bySocialGot_Passes() throws Exception {
-        Assert.assertEquals("getBySocial() has failed", true, marketingPreferenceDetailUnderTest.getBySocial());
+        Assert.assertEquals("MarketingPreferenceDetail.getBySocial() has failed",
+                true, marketingPreferenceDetailUnderTest.getBySocial());
     }
 
     /**
@@ -133,7 +145,8 @@ public class MarketingPreferenceDetailTest {
     @Test
     public void setBySocial_bySocialSet_Passes() throws Exception {
         marketingPreferenceDetailUnderTest.setBySocial(testValue);
-        Assert.assertEquals("getBySocial() has failed", testValue, marketingPreferenceDetailUnderTest.getBySocial());
+        Assert.assertEquals("MarketingPreferenceDetail.getBySocial() has failed",
+                testValue, marketingPreferenceDetailUnderTest.getBySocial());
     }
 
     /**
@@ -141,7 +154,7 @@ public class MarketingPreferenceDetailTest {
      */
     @Test
     public void toString_StringReturned_Passes() throws Exception {
-        Assert.assertEquals( "toString() has failed",
+        Assert.assertEquals( "MarketingPreferenceDetail.toString() has failed",
                 "MarketingPreferenceDetail{marketingPreferenceId=1, byEmail=true, byPost=true, byPhone=true, byText=true, byApp=true, bySocial=true}",
                 marketingPreferenceDetailUnderTest.toString());
     }
