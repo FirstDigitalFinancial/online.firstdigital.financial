@@ -8,7 +8,6 @@ package financial.firstdigital.online.model;
  * @version 0.1
  * @since   2017-09-10
  */
-
 public enum UserType {
     ADMINISTRATOR,
     CUSTOMER_SUPPORT,
