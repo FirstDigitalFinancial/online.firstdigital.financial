@@ -40,6 +40,26 @@ public class AddressDetail {
     @Column(name = "postCode", length = 10)
     private String postCode;
 
+    public AddressDetail() {
+
+    }
+
+    public AddressDetail(Long addressId,
+                         int houseNumber,
+                         String houseName,
+                         String streetName,
+                         Town town,
+                         County county,
+                         String postCode) {
+        this.addressId = addressId;
+        this.houseNumber = houseNumber;
+        this.houseName = houseName;
+        this.streetName = streetName;
+        this.town = town;
+        this.county = county;
+        this.postCode = postCode;
+    }
+
     public Long getAddressId() {
         return addressId;
     }
