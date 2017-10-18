@@ -25,6 +25,14 @@ public class County {
     @Column(name = "countyName")
     private String countyName;
 
+    public County() {
+    }
+
+    public County(int countyId, String countyName) {
+        this.countyId = countyId;
+        this.countyName = countyName;
+    }
+
     public void setCountyId(int countyId) {
         this.countyId = countyId;
     }

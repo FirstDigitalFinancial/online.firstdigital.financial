@@ -66,6 +66,26 @@ public class CustomerDetail {
 //    @JoinColumn(name = "loginId")
 //    private LoginDetail loginDetail;
 
+    public CustomerDetail() {
+
+    }
+
+    public CustomerDetail(Long customerId, Title title, String firstName, String lastName,
+                          String otherNames, Gender gender, Set<AddressDetail> addressDetailSet,
+                          Set<EmailDetail> emailDetailSet, Set<AccountDetail> acountDetailSet,
+                          MarketingPreferenceDetail marketingPreferenceDetail) {
+        this.customerId = customerId;
+        this.title = title;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.otherNames = otherNames;
+        this.gender = gender;
+        this.addressDetailSet = addressDetailSet;
+        this.emailDetailSet = emailDetailSet;
+        this.accountDetailSet = acountDetailSet;
+        this.marketingPreferenceDetail = marketingPreferenceDetail;
+    }
+
     public Long getCustomerId() {
         return customerId;
     }
