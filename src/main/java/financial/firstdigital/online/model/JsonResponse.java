@@ -8,10 +8,25 @@ package financial.firstdigital.online.model;
  * @version 0.1
  * @since   2017-09-10
  */
-public abstract class JsonResponse {
+public class JsonResponse {
 
     private int status;
     private String message;
+
+    /**
+     * JsonResponse constructor.
+     */
+    public JsonResponse() {
+
+    }
+
+    /**
+     * JsonResponse constructor with parameters.
+     */
+    public JsonResponse(int status, String message) {
+        this.status = status;
+        this.message = message;
+    }
 
     /**
      * Gets the status of the JsonResponse.
@@ -53,7 +68,5 @@ public abstract class JsonResponse {
         this.message = message;
 
     }
-
-    abstract public String toString();
 
 }
