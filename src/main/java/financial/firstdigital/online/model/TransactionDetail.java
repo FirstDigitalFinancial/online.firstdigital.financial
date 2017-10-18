@@ -37,6 +37,19 @@ public class TransactionDetail {
     @ManyToOne
     private AccountDetail accountDetail;
 
+    public TransactionDetail() {
+
+    }
+
+    public TransactionDetail(Long transactionId, TransactionType transactionType, BigDecimal transactionValue,
+                             BigDecimal endOfTransactionBalance, AccountDetail accountDetail) {
+        this.transactionId = transactionId;
+        this.transactionType = transactionType;
+        this.transactionValue = transactionValue;
+        this.endOfTransactionBalance = endOfTransactionBalance;
+        this.accountDetail = accountDetail;
+    }
+
     public Long getTransactionId() {
         return transactionId;
     }
