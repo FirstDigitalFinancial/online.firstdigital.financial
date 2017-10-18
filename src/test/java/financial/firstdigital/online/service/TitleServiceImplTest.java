@@ -49,7 +49,7 @@ public class TitleServiceImplTest {
      */
     @Test
     public void findDistinctByTitleIdEquals_TitleFound_Passes() throws Exception {
-        Assert.assertEquals(titleServiceImplUnderTest.findDistinctByTitleIdEquals(1).getTitleId(),1);
+        Assert.assertEquals("TitleServiceImpl.findDistinctByTitleIdEquals failed",1, titleServiceImplUnderTest.findDistinctByTitleIdEquals(1).getTitleId());
     }
 
     /**
@@ -57,7 +57,7 @@ public class TitleServiceImplTest {
      */
     @Test
     public void findDistinctByTitleEquals_TitleFound_Passes() throws Exception {
-        Assert.assertEquals(titleServiceImplUnderTest.findDistinctByTitleEquals("Mr").getTitle(),"Mr");
+        Assert.assertEquals("TitleServiceImpl.findDistinctByTitleEquals failed", "Mr", titleServiceImplUnderTest.findDistinctByTitleEquals("Mr").getTitle());
     }
 
 }
