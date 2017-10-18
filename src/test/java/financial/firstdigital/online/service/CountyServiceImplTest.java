@@ -50,7 +50,7 @@ public class CountyServiceImplTest {
     @Test
     public void findDistinctByCountyIdEquals_CountyFound_Passes() throws Exception {
         Assert.assertEquals("CountyServiceImpl.findDistinctByCountyIdEquals failed",1,
-                mockCountyRepository.findDistinctByCountyIdEquals(1).getCountyId());
+                countyServiceUnderTest.findDistinctByCountyIdEquals(1).getCountyId());
     }
 
     /**
@@ -59,7 +59,7 @@ public class CountyServiceImplTest {
     @Test
     public void findDistinctByCountyNameEquals_CountyFound_Passes() throws Exception {
         Assert.assertEquals("CountyServiceImpl.findDistinctByCountyNameEquals failed","Lancashire",
-                mockCountyRepository.findDistinctByCountyNameEquals("Lancashire").getCountyName());
+                countyServiceUnderTest.findDistinctByCountyNameEquals("Lancashire").getCountyName());
     }
 
 }
