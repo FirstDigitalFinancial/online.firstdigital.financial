@@ -56,9 +56,17 @@ public class JsonResponseTest {
      * Tests JsonResponse.setMessage()
      */
     @Test
-    public void setMessage() throws Exception {
+    public void setMessage_MessageIsSet_Passes() throws Exception {
         jsonResponseUnderTest.setMessage("Second test message");
         Assert.assertEquals(jsonResponseUnderTest.getMessage(), "Second test message");
+    }
+
+    /**
+     * Tests JsonResponse.setMessage() on empty message
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void setMessage_EmptyMessageThrowsException_Passes() throws Exception {
+        jsonResponseUnderTest.setMessage("");
     }
 
 }

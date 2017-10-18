@@ -8,7 +8,6 @@ package financial.firstdigital.online.model;
  * @version 0.2
  * @since   2017-09-15
  */
-
 public enum Currency {
     BITCOIN_CORE("Bitcoin Core"),
     BITCOIN_CASH("Bitcoin Cash"),
