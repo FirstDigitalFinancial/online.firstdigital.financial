@@ -40,40 +40,40 @@ public class AccountDetailTest {
 
     @Test
     public void getAddress_AddressIsGot_Passes() throws Exception {
-        Assert.assertEquals(accountDetailUnderTest.getAddress(), "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa");
+        Assert.assertEquals("AccountDetail.getAddress() has failed", "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", accountDetailUnderTest.getAddress());
     }
 
     @Test
     public void setAddress_AddressIsSet_Passes() throws Exception {
         accountDetailUnderTest.setAddress("1XPTgDRhN8RFnzniWCddobD9iKZatrvH4");
-        Assert.assertEquals(accountDetailUnderTest.getAddress(), "1XPTgDRhN8RFnzniWCddobD9iKZatrvH4");
+        Assert.assertEquals("AccountDetail.setAddress() has failed", "1XPTgDRhN8RFnzniWCddobD9iKZatrvH4", accountDetailUnderTest.getAddress());
    }
 
     @Test
     public void getCurrency_CurrencyIsGot_Passes() throws Exception {
-        Assert.assertEquals(accountDetailUnderTest.getCurrency(),Currency.BITCOIN_CORE);
+        Assert.assertEquals("AccountDetail.getCurrency() has failed", Currency.BITCOIN_CORE, accountDetailUnderTest.getCurrency());
     }
 
     @Test
     public void setCurrency_CurrencyIsSet_Passes() throws Exception {
         accountDetailUnderTest.setCurrency(Currency.ETHEREUM);
-        Assert.assertEquals(accountDetailUnderTest.getCurrency(), Currency.ETHEREUM);
+        Assert.assertEquals("AccountDetail.setCurrency() has failed", Currency.ETHEREUM, accountDetailUnderTest.getCurrency());
     }
 
     @Test
     public void getStatus_StatusIsGot_Passes() throws Exception {
-        Assert.assertEquals(accountDetailUnderTest.getStatus(), AccountStatus.OPEN);
+        Assert.assertEquals("AccountDetail.getStatus() has failed", AccountStatus.OPEN, accountDetailUnderTest.getStatus());
     }
 
     @Test
     public void setStatus_StatusIsSet_Passes() throws Exception {
         accountDetailUnderTest.setStatus(AccountStatus.CLOSED);
-        Assert.assertEquals(accountDetailUnderTest.getStatus(), AccountStatus.CLOSED);
+        Assert.assertEquals("AccountDetail.setStatus() has failed", AccountStatus.CLOSED, accountDetailUnderTest.getStatus());
     }
 
     @Test
     public void toString_StringReturned_Passes() throws Exception {
-        Assert.assertEquals(accountDetailUnderTest.toString(),"AccountDetail{accountId=1, address='1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', currency=BITCOIN_CORE, status=OPEN}");
+        Assert.assertEquals("AccountDetail.toString() has failed", "AccountDetail{accountId=1, address='1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', currency=BITCOIN_CORE, status=OPEN}", accountDetailUnderTest.toString());
     }
 
 }
