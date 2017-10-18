@@ -21,6 +21,10 @@ public class AccountDetailTest {
 
     AccountDetail accountDetailUnderTest;
 
+    /**
+     * Sets up objects and mocks external dependencies needed
+     * for the tests.
+     */
     @Before
     public void setUp() throws Exception {
         accountDetailUnderTest = new AccountDetail(1L,

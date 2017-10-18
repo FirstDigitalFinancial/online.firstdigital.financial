@@ -7,7 +7,7 @@ import javax.persistence.*;
  * about the customers login details
  *
  * @author  Andy McCall
- * @version 0.1
+ * @version 0.2
  * @since   2017-09-21
  */
 
@@ -55,6 +55,17 @@ public class EmailDetail {
 
     public void setVerified(Boolean verified) {
         isVerified = verified;
+    }
+
+    public EmailDetail() {
+
+    }
+
+    public EmailDetail(Long emailId, String emailAddress, EmailType emailType, Boolean isVerified) {
+        this.emailId = emailId;
+        this.emailAddress = emailAddress;
+        this.emailType = emailType;
+        this.isVerified = isVerified;
     }
 
     @Override
