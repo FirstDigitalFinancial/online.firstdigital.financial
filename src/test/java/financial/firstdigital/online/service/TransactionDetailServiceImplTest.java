@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * The TransactionDetailServiceImplTest class is a test class that
@@ -83,7 +83,7 @@ public class TransactionDetailServiceImplTest {
 
         transactionDetailServiceUnderTest.saveTransactionDetail(transactionDetail);
 
-        //TODO: Find a way to test the above CrudRepository save...
+        verify(mockTransactionDetailRepository, times(1)).save(transactionDetail);
 
     }
 

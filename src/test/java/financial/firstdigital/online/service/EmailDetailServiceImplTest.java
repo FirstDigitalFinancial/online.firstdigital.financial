@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -32,8 +34,6 @@ public class EmailDetailServiceImplTest {
     /**
      * Sets up objects and mocks external dependencies needed
      * for the tests.
-     *
-     * (Long emailId, String emailAddress, EmailType emailType, Boolean isVerified) {
      *
      */
     @Before
@@ -77,14 +77,14 @@ public class EmailDetailServiceImplTest {
      */
     @Test
     public void saveEmailDetail_EmailIsSaved_Passes() throws Exception {
-        EmailDetail emailDetail2 = new EmailDetail(Long.valueOf(2),
+        EmailDetail emailDetail = new EmailDetail(Long.valueOf(2),
                 "test2@firstdigital.financial",
                 EmailType.PRIMARY,
                 true);
 
-        emailDetailServiceUnderTest.saveEmailDetail(emailDetail2);
+        emailDetailServiceUnderTest.saveEmailDetail(emailDetail);
 
-        //TODO: Find a way to test the above CrudRepository save...
+        verify(mockEmailDetailRepository, times(1)).save(emailDetail);
 
     }
 

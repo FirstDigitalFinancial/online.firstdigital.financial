@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -102,7 +104,7 @@ public class AddressDetailServiceImplTest {
 
         addressDetailServiceUnderTest.saveAddressDetailSet(addressDetailSet);
 
-        //TODO: Find a way to test the above CrudRepository save...
+        verify(mockAddressDetailRepository, times(1)).save(addressDetailSet);
     }
 
     /**
