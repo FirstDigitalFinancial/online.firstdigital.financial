@@ -14,7 +14,6 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-                notifyStarted()
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
