@@ -23,7 +23,7 @@ pipeline {
         
         stage ('Test') {
             steps {
-                sh 'mvn clean jacoco:prepare-agent test jacoco:report org.eluder.coveralls:coveralls-maven-plugin:report"
+                sh 'mvn clean jacoco:prepare-agent test jacoco:report org.eluder.coveralls:coveralls-maven-plugin:report'
             }
         }
         
