@@ -34,11 +34,7 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore=true install'
             }
         }
-        
-        def notifyStarted() {
-           slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-        }
-        
+       
     }
     
 }
