@@ -35,7 +35,7 @@ pipeline {
         }
 
         stage ('Publish to S3') {
-            step([
+            steps([
                     $class: 'S3BucketPublisher',
                     entries: [[
                         sourceFile: 'online.firstdigital.financial-1.0.${BUILD_NUMER}.${GIT_COMMIT}.jar',
