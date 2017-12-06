@@ -43,7 +43,7 @@ pipeline {
                         bucket: 'artifacts.firstdigital.financial',
                         selectedRegion: 'eu-west-1',
                         noUploadOnFailure: true,
-                        managedArtifacts: true,
+                        managedArtifacts: false,
                         flatten: true,
                         showDirectlyInBrowser: true,
                         keepForever: true,
