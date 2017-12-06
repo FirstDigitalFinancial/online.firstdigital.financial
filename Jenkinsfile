@@ -30,10 +30,6 @@ pipeline {
         
         stage ('Build') {
             steps {
-                sh '''
-                    echo "Build Number: ${BUILD_NUMBER}"
-                    echo "Build Revision: ${GIT_COMMIT}"
-                   '''
                 sh 'mvn -Dmaven.test.failure.ignore=true install -Dbuild.number=${BUILD_NUMBER} -Dbuild.revision=${GIT_COMMIT}'
             }
         }
@@ -43,7 +39,7 @@ pipeline {
                 step([
                     $class: 'S3BucketPublisher',
                     entries: [[
-                        sourceFile: 'online.firstdigital.financial-1.0.${BUILD_NUMER}.${GIT_COMMIT}.jar',
+                        sourceFile: 'online.firstdigital.financial-1.0.build-${BUILD_NUMER}.jar',
                         bucket: 'artifacts.firstdigital.financial',
                         selectedRegion: 'eu-west-1',
                         noUploadOnFailure: true,
