@@ -165,6 +165,7 @@
                             </manifestSection>
                         </manifestSections>
                     </archive>
+                    <finalName>${artifactId}-${version}.build-${build.number}</finalName>
                 </configuration>
             </plugin>
             <plugin>
