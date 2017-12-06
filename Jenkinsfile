@@ -30,7 +30,11 @@ pipeline {
         
         stage ('Build') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install -Dbuild.number=-${BUILD_NUMBER} -Dbuild.revision=${GIT_COMMIT}'
+                sh '''
+                    echo "Build Number: ${BUILD_NUMBER}"
+                    echo "Build Revision: ${GIT_COMMIT}"
+                   '''
+                sh 'mvn -Dmaven.test.failure.ignore=true install -Dbuild.number=${BUILD_NUMBER} -Dbuild.revision=${GIT_COMMIT}'
             }
         }
 
