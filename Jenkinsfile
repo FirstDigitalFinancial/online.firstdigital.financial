@@ -39,7 +39,7 @@ pipeline {
                 step([
                     $class: 'S3BucketPublisher',
                     entries: [[
-                        sourceFile: 'online.firstdigital.financial-1.0.build-${BUILD_NUMER}.jar',
+                        sourceFile: 'online.firstdigital.financial-1.0.build-${BUILD_NUMBER}.jar',
                         bucket: 'artifacts.firstdigital.financial',
                         selectedRegion: 'eu-west-1',
                         noUploadOnFailure: true,
