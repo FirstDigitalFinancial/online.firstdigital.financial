@@ -30,8 +30,26 @@ pipeline {
         
         stage ('Build') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install'
+                sh 'mvn -Dmaven.test.failure.ignore=true install -Dbuild.number=-${BUILD_NUMBER} -Dbuild.revision=${GIT_COMMIT}'
             }
+        }
+
+        stage ('Publish to S3') {
+            step([
+                    $class: 'S3BucketPublisher',
+                    entries: [[
+                        sourceFile: 'online.firstdigital.financial-1.0.${BUILD_NUMER}.${GIT_COMMIT}.jar',
+                        bucket: 'artifacts.firstdigital.financial',
+                        selectedRegion: 'eu-west-1',
+                        noUploadOnFailure: true,
+                        managedArtifacts: true,
+                        flatten: true,
+                        showDirectlyInBrowser: true,
+                        keepForever: true,
+                    ]],
+                    profileName: 'artifacts.firstdigital.financial',
+                    dontWaitForConcurrentBuildCompletion: false,
+                ])
         }
        
     }
