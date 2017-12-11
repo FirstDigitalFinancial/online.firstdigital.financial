@@ -1,6 +1,6 @@
 package financial.firstdigital.online.controller;
 
-import financial.firstdigital.online.service.HealthcheckDetailService;
+import financial.firstdigital.online.service.HealthCheckDetailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @RestController
-public class HealthcheckController {
+public class HealthCheckController {
 
     private static final Logger logger =
-            LoggerFactory.getLogger(HealthcheckController.class);
+            LoggerFactory.getLogger(HealthCheckController.class);
 
     private final AtomicBoolean maintenanceModeEnabled = new AtomicBoolean();
 
-    HealthcheckDetailService healthcheckDetailService;
+    HealthCheckDetailService healthCheckDetailService;
 
     @Autowired
-    public void setHealthcheckDetailService(HealthcheckDetailService healthcheckDetailService) {
-        this.healthcheckDetailService = healthcheckDetailService;
+    public void setHealthCheckDetailService(HealthCheckDetailService healthCheckDetailService) {
+        this.healthCheckDetailService = healthCheckDetailService;
     }
 
-    public HealthcheckController() {
+    public HealthCheckController() {
 
     }
 
@@ -51,7 +51,7 @@ public class HealthcheckController {
         boolean allIsHealthy;
 
         try {
-            allIsHealthy = healthcheckDetailService.isHealthy();
+            allIsHealthy = healthCheckDetailService.isHealthy();
         } catch (Exception e) {
             allIsHealthy = false;
         }
