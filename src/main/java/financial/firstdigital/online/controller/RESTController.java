@@ -32,7 +32,6 @@ import static org.springframework.http.MediaType.*;
 public class RESTController {
 
     private Clock clock = Clock.systemDefaultZone();
-    ;
 
     private static final Logger logger =
             LoggerFactory.getLogger(RESTController.class);
