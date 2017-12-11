@@ -47,7 +47,16 @@ public class HealthcheckController {
     }
 
     private boolean isHealthy() {
-        return healthcheckDetailService.isHealthy();
+
+        boolean allIsHealthy;
+
+        try {
+            allIsHealthy = healthcheckDetailService.isHealthy();
+        } catch (Exception e) {
+            allIsHealthy = false;
+        }
+
+        return allIsHealthy;
     }
 
     private void toggleMaintenanceMode(final String maintenanceMode) throws Exception {
