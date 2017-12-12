@@ -58,7 +58,7 @@ public class HealthCheckControllerTest {
 
         mockMvc.perform(get("/healthcheck"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("OK")));
+                .andExpect(content().string(containsString("OK-")));
     }
 
     @Test
