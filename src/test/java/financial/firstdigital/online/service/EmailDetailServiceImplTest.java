@@ -29,7 +29,7 @@ public class EmailDetailServiceImplTest {
     EmailDetailRepository mockEmailDetailRepository;
 
     @InjectMocks
-    EmailDetailService emailDetailServiceUnderTest = new EmailDetailServiceImpl();
+    EmailDetailService emailDetailServiceUnderTest = new EmailDetailService();
 
     /**
      * Sets up objects and mocks external dependencies needed

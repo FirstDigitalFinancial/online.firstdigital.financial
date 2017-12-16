@@ -24,7 +24,7 @@ public class EmailDetail {
     private String emailAddress;
 
     @Column(name = "emailType")
-    private EmailType emailType;
+    private EmailType emailType = EmailType.PRIMARY;
 
     @Column(name = "isVerified")
     private Boolean isVerified;
