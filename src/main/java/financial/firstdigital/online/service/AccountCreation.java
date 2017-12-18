@@ -1,6 +1,6 @@
 package financial.firstdigital.online.service;
 
-import financial.firstdigital.online.model.User;
+import financial.firstdigital.online.model.ApplicationUser;
 import financial.firstdigital.online.model.accounts.RegistrationDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -19,11 +19,11 @@ public class AccountCreation {
 
     public boolean createAccount(RegistrationDetails registrationDetails) {
 
-        User user = new User();
-        user.setUserName(registrationDetails.getEmailAddress());
-        user.setPassword(bCryptPasswordEncoder.encode(registrationDetails.getPassword()));
+        ApplicationUser applicationUser = new ApplicationUser();
+        applicationUser.setUsername(registrationDetails.getEmailAddress());
+        applicationUser.setPassword(bCryptPasswordEncoder.encode(registrationDetails.getPassword()));
 
-        userDetailsService.saveUserDetails(user);
+        userDetailsService.saveUserDetails(applicationUser);
 
         return true;
     }

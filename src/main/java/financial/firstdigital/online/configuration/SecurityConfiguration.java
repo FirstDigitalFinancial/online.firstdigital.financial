@@ -1,47 +1,54 @@
 package financial.firstdigital.online.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import financial.firstdigital.online.filter.JWTAuthenticationFilter;
+import financial.firstdigital.online.filter.JWTAuthorizationFilter;
+import financial.firstdigital.online.service.SpringUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-/**
- * The SecurityConfiguration class is the class that set
- * Spring Security configuration
- *
- * @author  Andy McCall
- * @version 0.2
- * @since   2017-09-11
- */
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/user/**", "/includes/**").permitAll();
-        http.csrf().disable();
+    private final SpringUserDetailsService springUserDetailsService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public SecurityConfiguration(SpringUserDetailsService springUserDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.springUserDetailsService = springUserDetailsService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable().authorizeRequests()
+            .antMatchers(HttpMethod.GET, "/healthcheck").permitAll()
+            .antMatchers(HttpMethod.POST, "/registration/**").permitAll()
+            .anyRequest().authenticated()
+        .and()
+        .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+        .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    }
 
-//        auth.userDetailsService(userDetailsService)
-//                .passwordEncoder(passwordEncoder());
-
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(springUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-
-        return new BCryptPasswordEncoder();
+    CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
     }
 }

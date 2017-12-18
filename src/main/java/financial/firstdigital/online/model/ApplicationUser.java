@@ -4,15 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "fdf_users")
-public class User {
+public class ApplicationUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "serial")
     private long id;
 
-    @Column(name = "userName")
-    private String userName; //email and username are synonomoys
+    @Column(name = "user_name")
+    private String username; //email and username are synonomoys
 
     @Column(name = "password")
     private String password;
@@ -21,12 +21,12 @@ public class User {
         return id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
