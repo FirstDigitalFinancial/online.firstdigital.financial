@@ -20,7 +20,7 @@ import javax.transaction.Transactional;
 public class TownServiceImpl implements TownService {
 
     @Autowired
-    TownRepository townRepository;
+    private TownRepository townRepository;
 
     public Town findDistinctByTownIdEquals(int townId) {
         return townRepository.findDistinctByTownIdEquals(townId);

@@ -1,29 +1,29 @@
 package financial.firstdigital.online.service;
 
-import financial.firstdigital.online.model.EmailDetail;
+import financial.firstdigital.online.model.User;
 import financial.firstdigital.online.model.accounts.RegistrationDetails;
-import financial.firstdigital.online.transformers.EmailDetailTransformer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AccountCreation {
 
-    private EmailDetailService emailDetailService;
-    private EmailDetailTransformer emailDetailTransformer;
+    private UserDetailsService userDetailsService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AccountCreation(EmailDetailService emailDetailService, EmailDetailTransformer emailDetailTransformer) {
-        this.emailDetailService = emailDetailService;
-        this.emailDetailTransformer = emailDetailTransformer;
+
+    public AccountCreation(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public boolean createAccount(RegistrationDetails registrationDetails) {
 
-        EmailDetail emailDetails = emailDetailTransformer.transform(registrationDetails);
-        if (emailDetailService.exists(emailDetails)) {
-            return false;
-        }
+        User user = new User();
+        user.setUserName(registrationDetails.getEmailAddress());
+        user.setPassword(bCryptPasswordEncoder.encode(registrationDetails.getPassword()));
 
-        emailDetailService.saveEmailDetail(emailDetails);
+        userDetailsService.saveUserDetails(user);
 
         return true;
     }

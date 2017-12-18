@@ -73,7 +73,7 @@ public class EmailDetailServiceImplTest {
     }
 
     /**
-     * Tests EmailDetailServiceImpl.saveEmailDetail()
+     * Tests EmailDetailServiceImpl.saveUserDetails()
      */
     @Test
     public void saveEmailDetail_EmailIsSaved_Passes() throws Exception {
