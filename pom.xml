@@ -107,11 +107,6 @@
             <scope>test</scope>
             <version>1.4.196</version>
         </dependency>
-        <dependency>
-            <groupId>financial.firstdigital.online</groupId>
-            <artifactId>online.firstdigital.financial</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
     <build>
