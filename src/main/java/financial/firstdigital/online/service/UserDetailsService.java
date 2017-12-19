@@ -19,7 +19,7 @@ public class UserDetailsService {
     }
 
     public boolean exists(ApplicationUser applicationUser) {
-        if (applicationUser.getUsername() != null && userDetailsRepository.findDistinctByUserNameEquals(applicationUser.getUsername()) != null) {
+        if (applicationUser.getUsername() != null && userDetailsRepository.findDistinctByUsernameEquals(applicationUser.getUsername()) != null) {
             return true;
         }
 
@@ -27,6 +27,6 @@ public class UserDetailsService {
     }
 
     public ApplicationUser findByUsername(String username) {
-        return userDetailsRepository.findDistinctByUserNameEquals(username);
+        return userDetailsRepository.findDistinctByUsernameEquals(username);
     }
 }

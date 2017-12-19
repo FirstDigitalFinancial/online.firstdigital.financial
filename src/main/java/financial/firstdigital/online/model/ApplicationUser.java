@@ -11,7 +11,7 @@ public class ApplicationUser {
     @Column(name = "id", columnDefinition = "serial")
     private long id;
 
-    @Column(name = "user_name")
+    @Column(name = "username")
     private String username; //email and username are synonomoys
 
     @Column(name = "password")

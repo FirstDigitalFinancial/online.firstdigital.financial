@@ -21,7 +21,7 @@ public class SpringUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        ApplicationUser domainApplicationUser = userDetailsRepository.findDistinctByUserNameEquals(username);
+        ApplicationUser domainApplicationUser = userDetailsRepository.findDistinctByUsernameEquals(username);
         if (domainApplicationUser == null) {
             throw new UsernameNotFoundException(username);
         }
