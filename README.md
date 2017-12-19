@@ -18,4 +18,4 @@ https://firstdigitalfinancial.slack.com/
 
 # License
 
-This is proprietary software.
+This is proprietary software.  Please do not copy.
