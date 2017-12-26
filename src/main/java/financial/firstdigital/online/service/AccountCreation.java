@@ -25,6 +25,6 @@ public class AccountCreation {
 
         userDetailsService.saveUserDetails(applicationUser);
 
-        return true;
+        return userDetailsService.exists(applicationUser);
     }
 }
