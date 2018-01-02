@@ -4,7 +4,6 @@ import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -15,16 +14,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static financial.firstdigital.online.configuration.SecurityConstants.HEADER_STRING;
-import static financial.firstdigital.online.configuration.SecurityConstants.SECRET;
 import static financial.firstdigital.online.configuration.SecurityConstants.TOKEN_PREFIX;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
-        super(authenticationManager);
-    }
+    private final String jwtSecretKey;
 
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, AuthenticationEntryPoint authenticationEntryPoint) {
-        super(authenticationManager, authenticationEntryPoint);
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager, String jwtSecretKey) {
+        super(authenticationManager);
+        this.jwtSecretKey = jwtSecretKey;
     }
 
     @Override
@@ -45,7 +42,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             String user = Jwts.parser()
-                    .setSigningKey(SECRET.getBytes())
+                    .setSigningKey(jwtSecretKey)
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();

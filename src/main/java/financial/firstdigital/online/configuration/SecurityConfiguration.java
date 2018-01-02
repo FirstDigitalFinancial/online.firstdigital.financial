@@ -3,6 +3,8 @@ package financial.firstdigital.online.configuration;
 import financial.firstdigital.online.filter.JWTAuthenticationFilter;
 import financial.firstdigital.online.filter.JWTAuthorizationFilter;
 import financial.firstdigital.online.service.SpringUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,6 +25,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final SpringUserDetailsService springUserDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Value("${jwt.secret.key}")
+    private String jwtSecretKey;
+
     public SecurityConfiguration(SpringUserDetailsService springUserDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.springUserDetailsService = springUserDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -35,8 +40,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.POST, "/registration/**").permitAll()
             .anyRequest().authenticated()
         .and()
-        .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-        .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+        .addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtSecretKey))
+        .addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtSecretKey))
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 

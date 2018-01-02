@@ -21,14 +21,15 @@ import java.util.Date;
 
 import static financial.firstdigital.online.configuration.SecurityConstants.HEADER_STRING;
 import static financial.firstdigital.online.configuration.SecurityConstants.TOKEN_PREFIX;
-import static financial.firstdigital.online.configuration.SecurityConstants.SECRET;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private static final long TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000; //24 hours
+    private final String jwtSecretKey;
     private AuthenticationManager authenticationManager;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, String jwtSecretKey) {
         this.authenticationManager = authenticationManager;
+        this.jwtSecretKey = jwtSecretKey;
     }
 
     @Override
@@ -46,11 +47,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = Jwts.builder()
                 .setSubject(((User) auth.getPrincipal()).getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
+                .signWith(SignatureAlgorithm.HS512, jwtSecretKey)
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
         res.resetBuffer();
         res.getOutputStream().write(token.getBytes());
-
     }
 }
