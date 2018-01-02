@@ -29,7 +29,6 @@ public class RegistrationResource {
         this.passwordValidation = passwordValidation;
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public ResponseEntity<String> registerNewUser(@RequestBody RegistrationDetails user) {
 
