@@ -1,6 +1,6 @@
 package financial.firstdigital.online.configuration;
 
-import financial.firstdigital.online.service.AccountCreation;
+import financial.firstdigital.online.transformers.ApplicationUserTransformer;
 import financial.firstdigital.online.transformers.EmailDetailTransformer;
 import financial.firstdigital.online.validation.EmailValidation;
 import financial.firstdigital.online.validation.PasswordValidation;
@@ -31,5 +31,10 @@ public class RegistrationConfiguration {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public ApplicationUserTransformer applicationUserTransformer() {
+        return new ApplicationUserTransformer(bCryptPasswordEncoder());
     }
 }
