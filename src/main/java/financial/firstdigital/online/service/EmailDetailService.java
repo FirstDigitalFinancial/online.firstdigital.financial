@@ -46,4 +46,7 @@ public class EmailDetailService {
     public EmailDetail findDistinctByEmailAddressEquals(String emailAddress) {
         return emailDetailRepository.findDistinctByEmailAddressEquals(emailAddress);
     }
+    public EmailDetail findDistinctByVerificationKeyEquals(String verificationKey) {
+        return emailDetailRepository.findDistinctByVerificationKeyEquals(verificationKey);
+    }
 }

@@ -2,9 +2,9 @@ Thanks for signing up at First Digital Financial!
 
 Verify your email address by visiting the following link:
 
-https://firstdigital.financial/verify-email?key=VERIFICATION_KEY
+https://firstdigital.financial/verification/verify?verificationKey=VERIFICATION_KEY
 
-You can also go to https://firstdigital.financial/verify-email and manually enter your verification key:
+You can also go to https://firstdigital.financial/verification/verify and manually enter your verification key:
 
 VERIFICATION_KEY
 
