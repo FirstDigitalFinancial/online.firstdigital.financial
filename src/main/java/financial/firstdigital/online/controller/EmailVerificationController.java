@@ -1,8 +1,8 @@
 package financial.firstdigital.online.controller;
 
-import financial.firstdigital.online.exceptions.ValidationException;
+import financial.firstdigital.online.exceptions.AccountCreationException;
 import financial.firstdigital.online.model.EmailDetail;
-import financial.firstdigital.online.service.EmailDetailService;
+import financial.firstdigital.online.service.database.EmailDetailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class EmailVerificationController {
     }
 
     @RequestMapping(value = "verify", method = RequestMethod.POST)
-    public ResponseEntity<String> verifyEmail(@RequestBody EmailDetail verificationKey) throws ValidationException {
+    public ResponseEntity<String> verifyEmail(@RequestBody EmailDetail verificationKey) throws AccountCreationException {
 
         EmailDetail emailDetailToVerify = emailDetailService.findDistinctByVerificationKeyEquals(verificationKey.getVerificationKey());
 

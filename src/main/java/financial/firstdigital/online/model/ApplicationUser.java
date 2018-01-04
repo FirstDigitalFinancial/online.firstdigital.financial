@@ -17,6 +17,12 @@ public class ApplicationUser {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "isVerified")
+    private Boolean isVerified;
+
+    @Column(name = "verificationKey")
+    private String verificationKey;
+
     public long getId() {
         return id;
     }
@@ -35,5 +41,21 @@ public class ApplicationUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(Boolean verified) {
+        isVerified = verified;
+    }
+
+    public String getVerificationKey() {
+        return verificationKey;
+    }
+
+    public void setVerificationKey(String verificationKey) {
+        this.verificationKey = verificationKey;
     }
 }

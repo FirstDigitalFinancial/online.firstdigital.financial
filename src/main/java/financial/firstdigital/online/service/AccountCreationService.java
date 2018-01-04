@@ -1,15 +1,13 @@
 package financial.firstdigital.online.service;
 
-import financial.firstdigital.online.exceptions.ValidationException;
+import financial.firstdigital.online.exceptions.AccountCreationException;
 import financial.firstdigital.online.model.ApplicationUser;
 import financial.firstdigital.online.model.accounts.RegistrationDetails;
+import financial.firstdigital.online.service.database.UserDetailsService;
 import financial.firstdigital.online.transformers.ApplicationUserTransformer;
 import financial.firstdigital.online.validation.EmailValidation;
 import financial.firstdigital.online.validation.PasswordValidation;
 import org.springframework.stereotype.Component;
-
-import static financial.firstdigital.online.service.AccountCreationStatus.CREATED;
-import static financial.firstdigital.online.service.AccountCreationStatus.USER_EXISTS;
 
 @Component
 public class AccountCreationService {
@@ -29,26 +27,26 @@ public class AccountCreationService {
         this.emailValidation = emailValidation;
     }
 
-    public AccountCreationStatus createAccount(RegistrationDetails registrationDetails) throws ValidationException {
+    public ApplicationUser createAccount(RegistrationDetails registrationDetails) throws AccountCreationException {
+        validate(registrationDetails);
+
         ApplicationUser applicationUser = applicationUserTransformer.transform(registrationDetails);
 
         if (userDetailsService.exists(applicationUser)) {
-            return USER_EXISTS;
+            throw new AccountCreationException("User exists", "User Already Exists");
         }
 
-        validate(registrationDetails);
-
         userDetailsService.saveUserDetails(applicationUser);
-        return CREATED;
+        return applicationUser;
     }
 
-    private void validate(RegistrationDetails registrationDetails) throws ValidationException {
+    private void validate(RegistrationDetails registrationDetails) throws AccountCreationException {
         if (!emailValidation.validate(registrationDetails.getEmailAddress())) {
-            throw new ValidationException("Invalid email");
+            throw new AccountCreationException("Invalid email", "Invalid Email Address");
         }
 
         if (!passwordValidation.validate(registrationDetails.getPassword())) {
-            throw new ValidationException("Invalid password");
+            throw new AccountCreationException("Invalid password", "Invalid Password");
         }
     }
 }

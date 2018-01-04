@@ -2,8 +2,7 @@ package financial.firstdigital.online.configuration;
 
 import financial.firstdigital.online.filter.JWTAuthenticationFilter;
 import financial.firstdigital.online.filter.JWTAuthorizationFilter;
-import financial.firstdigital.online.service.SpringUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import financial.firstdigital.online.service.database.SpringUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

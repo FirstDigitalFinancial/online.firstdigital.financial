@@ -1,7 +1,7 @@
 package financial.firstdigital.online.controller;
 
 import financial.firstdigital.online.model.*;
-import financial.firstdigital.online.service.*;
+import financial.firstdigital.online.service.database.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

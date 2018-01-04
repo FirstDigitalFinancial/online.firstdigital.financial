@@ -4,6 +4,8 @@ import financial.firstdigital.online.model.AddressDetail;
 import financial.firstdigital.online.model.County;
 import financial.firstdigital.online.model.Town;
 import financial.firstdigital.online.repository.AddressDetailRepository;
+import financial.firstdigital.online.service.database.AddressDetailService;
+import financial.firstdigital.online.service.database.AddressDetailServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +16,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

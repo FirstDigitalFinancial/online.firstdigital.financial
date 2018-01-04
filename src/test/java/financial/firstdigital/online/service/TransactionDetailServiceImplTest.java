@@ -2,6 +2,8 @@ package financial.firstdigital.online.service;
 
 import financial.firstdigital.online.model.*;
 import financial.firstdigital.online.repository.TransactionDetailRepository;
+import financial.firstdigital.online.service.database.TransactionDetailService;
+import financial.firstdigital.online.service.database.TransactionDetailServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +13,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**

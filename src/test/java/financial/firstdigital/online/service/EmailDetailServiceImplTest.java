@@ -3,6 +3,7 @@ package financial.firstdigital.online.service;
 import financial.firstdigital.online.model.EmailDetail;
 import financial.firstdigital.online.model.EmailType;
 import financial.firstdigital.online.repository.EmailDetailRepository;
+import financial.firstdigital.online.service.database.EmailDetailService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
