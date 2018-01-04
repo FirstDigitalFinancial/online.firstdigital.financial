@@ -28,7 +28,8 @@ public class EmailDetailTest {
         emailDetailUnderTest = new EmailDetail(1L,
                 "test@firstdigital.financial",
                 EmailType.PRIMARY,
-                true);
+                true,
+                "7f7b353f-aac5-48d2-8f3a-8bc7e666c42c");
     }
 
     /**
@@ -95,7 +96,7 @@ public class EmailDetailTest {
      */
     @Test
     public void toString_StringReturned_Passes() throws Exception {
-        Assert.assertEquals(emailDetailUnderTest.toString(), "EmailDetail{emailId=1, emailAddress='test@firstdigital.financial', emailType=PRIMARY, isVerified=true}");
+        Assert.assertEquals("EmailDetail{emailId=1, emailAddress='test@firstdigital.financial', emailType=PRIMARY, isVerified=true, verificationKey='7f7b353f-aac5-48d2-8f3a-8bc7e666c42c'}", emailDetailUnderTest.toString());
     }
 
 }

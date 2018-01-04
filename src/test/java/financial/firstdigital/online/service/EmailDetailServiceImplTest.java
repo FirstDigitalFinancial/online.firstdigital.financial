@@ -44,7 +44,8 @@ public class EmailDetailServiceImplTest {
         EmailDetail emailDetail = new EmailDetail(Long.valueOf(1),
                                                   "test@firstdigital.financial",
                                                   EmailType.PRIMARY,
-                                                  true);
+                                                  true,
+                                                "7f7b353f-aac5-48d2-8f3a-8bc7e666c42c");
 
         when(mockEmailDetailRepository.findDistinctByEmailIdEquals(Long.valueOf(1))).thenReturn(emailDetail);
         when(mockEmailDetailRepository.findDistinctByEmailAddressEquals("test@firstdigital.financial")).thenReturn(emailDetail);
@@ -80,7 +81,8 @@ public class EmailDetailServiceImplTest {
         EmailDetail emailDetail = new EmailDetail(Long.valueOf(2),
                 "test2@firstdigital.financial",
                 EmailType.PRIMARY,
-                true);
+                true,
+                "7f7b353f-aac5-48d2-8f3a-8bc7e666c42c");
 
         emailDetailServiceUnderTest.saveEmailDetail(emailDetail);
 

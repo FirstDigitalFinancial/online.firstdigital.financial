@@ -29,6 +29,9 @@ public class EmailDetail {
     @Column(name = "isVerified")
     private Boolean isVerified;
 
+    @Column(name = "verificationKey")
+    private String verificationKey;
+
     public Long getEmailId() {
         return emailId;
     }
@@ -57,15 +60,24 @@ public class EmailDetail {
         isVerified = verified;
     }
 
+    public String getVerificationKey() {
+        return verificationKey;
+    }
+
+    public void setVerificationKey(String verificationKey) {
+        this.verificationKey = verificationKey;
+    }
+
     public EmailDetail() {
 
     }
 
-    public EmailDetail(Long emailId, String emailAddress, EmailType emailType, Boolean isVerified) {
+    public EmailDetail(Long emailId, String emailAddress, EmailType emailType, Boolean isVerified, String verificationKey) {
         this.emailId = emailId;
         this.emailAddress = emailAddress;
         this.emailType = emailType;
         this.isVerified = isVerified;
+        this.verificationKey = verificationKey;
     }
 
     @Override
@@ -75,6 +87,7 @@ public class EmailDetail {
                 ", emailAddress='" + emailAddress + '\'' +
                 ", emailType=" + emailType +
                 ", isVerified=" + isVerified +
+                ", verificationKey='" + verificationKey + '\'' +
                 '}';
     }
 }
