@@ -6,6 +6,9 @@ package financial.firstdigital.online.model.accounts;
 public class RegistrationDetails {
     private String emailAddress;
     private String password;
+    private String firstName;
+    private String lastName;
+    private String captchaResponse;
 
     @Override
     public String toString() {
@@ -26,5 +29,29 @@ public class RegistrationDetails {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getCaptchaResponse() {
+        return captchaResponse;
+    }
+
+    public void setCaptchaResponse(String captchaResponse) {
+        this.captchaResponse = captchaResponse;
     }
 }
