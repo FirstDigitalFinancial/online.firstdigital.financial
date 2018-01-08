@@ -181,7 +181,7 @@ public class RESTController {
 
         EmailDetail emailDetail = new EmailDetail();
         emailDetail.setEmailAddress("andy.mccall@gmail.com");
-        emailDetail.setEmailType(EmailType.PRIMARY);
+        emailDetail.setEmailType(ContactType.PRIMARY);
         emailDetail.setVerified(true);
 
         Set<EmailDetail> emailDetailSet = new HashSet<EmailDetail>();

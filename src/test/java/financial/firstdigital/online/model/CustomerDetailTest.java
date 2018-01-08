@@ -46,7 +46,7 @@ public class CustomerDetailTest {
 
         EmailDetail emailDetail = new EmailDetail();
         emailDetail.setEmailAddress("test@firstdigital.financial");
-        emailDetail.setEmailType(EmailType.PRIMARY);
+        emailDetail.setEmailType(ContactType.PRIMARY);
         emailDetail.setVerified(true);
         emailDetail.setVerificationKey("7f7b353f-aac5-48d2-8f3a-8bc7e666c42c");
 
@@ -230,7 +230,7 @@ public class CustomerDetailTest {
     @Test
     public void toString_StringReturned_Passes() throws Exception {
         Assert.assertEquals("CustomerDetail.toString() has failed",
-                "CustomerDetail{customerId=1, title=Title{titleId=1, title='Mr'}, firstName='Andy', lastName='McCall', otherNames='Edward', gender=MALE, addressDetailSet=[AddressDetail{addressId=1, houseNumber=95, houseName='Torrington', streetName='Newton Drive', town=town{townId=1, townName='Blackpool'}, county=County{countyId=1, countyName='Lancashire'}, postCode='FY3 8LX'}], emailDetailSet='[EmailDetail{emailId=null, emailAddress='test@firstdigital.financial', emailType=PRIMARY, isVerified=true, verificationKey='7f7b353f-aac5-48d2-8f3a-8bc7e666c42c'}]', accountDetailSet=[AccountDetail{accountId=null, address='1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', currency=BITCOIN_CORE, status=OPEN}], marketingPreferenceDetail=MarketingPreferenceDetail{marketingPreferenceId=null, byEmail=true, byPost=true, byPhone=false, byText=false, byApp=false, bySocial=true}}",
+                "CustomerDetail{customerId=1, title=Title{titleId=1, title='Mr'}, firstName='Andy', lastName='McCall', otherNames='Edward', gender=MALE, addressDetailSet=[AddressDetail{addressId=1, houseNumber=95, houseName='Torrington', streetName='Newton Drive', town=town{townId=1, townName='Blackpool'}, county=County{countyId=1, countyName='Lancashire'}, postCode='FY3 8LX'}], emailDetailSet='[EmailDetail{emailId=null, emailAddress='test@firstdigital.financial', contactType=PRIMARY, isVerified=true, verificationKey='7f7b353f-aac5-48d2-8f3a-8bc7e666c42c'}]', accountDetailSet=[AccountDetail{accountId=null, address='1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', currency=BITCOIN_CORE, status=OPEN}], marketingPreferenceDetail=MarketingPreferenceDetail{marketingPreferenceId=null, byEmail=true, byPost=true, byPhone=false, byText=false, byApp=false, bySocial=true}}",
                 customerDetailUnderTest.toString());
     }
 

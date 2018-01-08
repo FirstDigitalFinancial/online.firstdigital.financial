@@ -1,7 +1,7 @@
 package financial.firstdigital.online.service;
 
 import financial.firstdigital.online.model.EmailDetail;
-import financial.firstdigital.online.model.EmailType;
+import financial.firstdigital.online.model.ContactType;
 import financial.firstdigital.online.repository.EmailDetailRepository;
 import financial.firstdigital.online.service.database.EmailDetailService;
 import org.junit.Assert;
@@ -43,7 +43,7 @@ public class EmailDetailServiceImplTest {
 
         EmailDetail emailDetail = new EmailDetail(Long.valueOf(1),
                                                   "test@firstdigital.financial",
-                                                  EmailType.PRIMARY,
+                                                  ContactType.PRIMARY,
                                                   true,
                                                 "7f7b353f-aac5-48d2-8f3a-8bc7e666c42c");
 
@@ -80,7 +80,7 @@ public class EmailDetailServiceImplTest {
     public void saveEmailDetail_EmailIsSaved_Passes() throws Exception {
         EmailDetail emailDetail = new EmailDetail(Long.valueOf(2),
                 "test2@firstdigital.financial",
-                EmailType.PRIMARY,
+                ContactType.PRIMARY,
                 true,
                 "7f7b353f-aac5-48d2-8f3a-8bc7e666c42c");
 
