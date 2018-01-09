@@ -12,25 +12,29 @@ public class TelephoneDetail {
     private Long telephoneId;
 
     @Column(name = "telephoneNumber")
-    private String telephoneNumber;
+    private Long telephoneNumber;
 
     @Column(name = "contactType")
     private ContactType contactType = ContactType.PRIMARY;
 
+    @Column(name = "telephoneType")
+    private TelephoneType telephoneType;
+
     @Column(name = "isVerified")
     private Boolean isVerified;
 
-    @Column(name = "verificationKey")
-    private String verificationKey;
+    @Column(name = "verificationCode")
+    private int verificationCode;
 
     public TelephoneDetail() {
     }
 
-    public TelephoneDetail(String telephoneNumber, ContactType contactType, Boolean isVerified, String verificationKey) {
+    public TelephoneDetail(Long telephoneNumber, ContactType contactType, TelephoneType telephoneType, Boolean isVerified, int verificationCode) {
         this.telephoneNumber = telephoneNumber;
         this.contactType = contactType;
+        this.telephoneType = telephoneType;
         this.isVerified = isVerified;
-        this.verificationKey = verificationKey;
+        this.verificationCode = verificationCode;
     }
 
     public Long getTelephoneId() {
@@ -41,11 +45,11 @@ public class TelephoneDetail {
         this.telephoneId = telephoneId;
     }
 
-    public String getTelephoneNumber() {
+    public Long getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(String telephoneNumber) {
+    public void setTelephoneNumber(Long telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
 
@@ -57,6 +61,14 @@ public class TelephoneDetail {
         this.contactType = contactType;
     }
 
+    public TelephoneType getTelephoneType() {
+        return telephoneType;
+    }
+
+    public void setTelephoneType(TelephoneType telephoneType) {
+        this.telephoneType = telephoneType;
+    }
+
     public Boolean getVerified() {
         return isVerified;
     }
@@ -65,12 +77,12 @@ public class TelephoneDetail {
         isVerified = verified;
     }
 
-    public String getVerificationKey() {
-        return verificationKey;
+    public int getVerificationCode() {
+        return verificationCode;
     }
 
-    public void setVerificationKey(String verificationKey) {
-        this.verificationKey = verificationKey;
+    public void setVerificationCode(int verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     @Override
@@ -79,8 +91,9 @@ public class TelephoneDetail {
                 "telephoneId=" + telephoneId +
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", contactType=" + contactType +
+                ", telephoneType=" + telephoneType +
                 ", isVerified=" + isVerified +
-                ", verificationKey='" + verificationKey + '\'' +
+                ", verificationCode='" + verificationCode + '\'' +
                 '}';
     }
 }
