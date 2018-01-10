@@ -1,6 +1,7 @@
 package financial.firstdigital.online.model;
 
 import javax.persistence.*;
+import java.util.Random;
 
 @Entity
 @Table(name = "fdf_telephone_detail")
@@ -12,7 +13,7 @@ public class TelephoneDetail {
     private Long telephoneId;
 
     @Column(name = "telephoneNumber")
-    private Long telephoneNumber;
+    private String telephoneNumber;
 
     @Column(name = "contactType")
     private ContactType contactType = ContactType.PRIMARY;
@@ -27,14 +28,16 @@ public class TelephoneDetail {
     private int verificationCode;
 
     public TelephoneDetail() {
+        this.isVerified = false;
+        this.generateVerificationCode();
     }
 
-    public TelephoneDetail(Long telephoneNumber, ContactType contactType, TelephoneType telephoneType, Boolean isVerified, int verificationCode) {
+    public TelephoneDetail(String telephoneNumber, ContactType contactType, TelephoneType telephoneType, Boolean isVerified) {
         this.telephoneNumber = telephoneNumber;
         this.contactType = contactType;
         this.telephoneType = telephoneType;
-        this.isVerified = isVerified;
-        this.verificationCode = verificationCode;
+        this.isVerified = false;
+        this.generateVerificationCode();
     }
 
     public Long getTelephoneId() {
@@ -45,11 +48,13 @@ public class TelephoneDetail {
         this.telephoneId = telephoneId;
     }
 
-    public Long getTelephoneNumber() {
+    public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(Long telephoneNumber) {
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.setVerified(false);
+        this.generateVerificationCode();
         this.telephoneNumber = telephoneNumber;
     }
 
@@ -83,6 +88,10 @@ public class TelephoneDetail {
 
     public void setVerificationCode(int verificationCode) {
         this.verificationCode = verificationCode;
+    }
+
+    public void generateVerificationCode() {
+        setVerificationCode((int) Math.floor(Math.random() * 100000 + 1));
     }
 
     @Override

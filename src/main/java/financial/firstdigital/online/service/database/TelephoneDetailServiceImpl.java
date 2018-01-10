@@ -32,13 +32,14 @@ public class TelephoneDetailServiceImpl implements TelephoneDetailService {
         return false;
     }
 
-    public TelephoneDetail findDistinctByEmailIdEquals(Long emailId) {
+    public TelephoneDetail findDistinctByTelephoneIdEquals(Long emailId) {
         return telephoneDetailRepository.findDistinctByTelephoneIdEquals(emailId);
     }
-    public TelephoneDetail findDistinctByTelephoneNumberEquals(Long telephoneNumber) {
+    public TelephoneDetail findDistinctByTelephoneNumberEquals(String telephoneNumber) {
         return telephoneDetailRepository.findDistinctByTelephoneNumberEquals(telephoneNumber);
     }
-    public TelephoneDetail findDistinctByVerificationCodeEquals(int verificationCode) {
-        return telephoneDetailRepository.findDistinctByVerificationCodeEquals(verificationCode);
+    public TelephoneDetail findDistinctByVerificationCodeIs(int verificationCode) {
+        System.out.println("Searching for " + verificationCode);
+        return telephoneDetailRepository.findDistinctByVerificationCodeIs(verificationCode);
     }
 }

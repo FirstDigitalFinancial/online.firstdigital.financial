@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/verification")
+@RequestMapping("/verification/email/")
 public class EmailVerificationController {
 
     private static final Logger logger = LoggerFactory.getLogger(EmailVerificationController.class);
@@ -22,6 +22,13 @@ public class EmailVerificationController {
 
     public EmailVerificationController(EmailDetailService emailDetailService) {
         this.emailDetailService = emailDetailService;
+    }
+
+    @RequestMapping(value = "verify", method = RequestMethod.GET)
+    public ResponseEntity<String> getTelephoneDetails(String verificationToken) {
+
+        return new ResponseEntity<>("Not implemented", HttpStatus.NOT_IMPLEMENTED);
+
     }
 
     @RequestMapping(value = "verify", method = RequestMethod.POST)

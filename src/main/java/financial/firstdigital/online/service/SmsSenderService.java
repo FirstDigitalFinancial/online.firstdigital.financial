@@ -41,7 +41,7 @@ public class SmsSenderService {
                 new PhoneNumber(TWILIO_FROM_NUMBER),
                 fullMessage).create();
 
-        logger.info("SMS sent. Sid: " + message.getSid());
+        logger.info("SMS sent Sid: " + message.getSid());
 
     }
 
