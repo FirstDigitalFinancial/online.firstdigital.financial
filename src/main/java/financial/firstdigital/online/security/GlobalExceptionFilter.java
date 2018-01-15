@@ -1,4 +1,4 @@
-package financial.firstdigital.online.filter;
+package financial.firstdigital.online.security;
 
 import financial.firstdigital.online.exceptions.FdfException;
 import financial.firstdigital.online.model.ErrorResponse;
