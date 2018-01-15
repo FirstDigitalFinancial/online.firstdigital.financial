@@ -1,4 +1,4 @@
-package financial.firstdigital.online.filter;
+package financial.firstdigital.online.security;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;

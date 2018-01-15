@@ -1,7 +1,6 @@
 package financial.firstdigital.online.configuration;
 
-import financial.firstdigital.online.filter.JWTAuthenticationFilter;
-import financial.firstdigital.online.filter.JWTAuthorizationFilter;
+import financial.firstdigital.online.security.TokenAuthenticationFilter;
 import financial.firstdigital.online.service.database.SpringUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -23,26 +22,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final SpringUserDetailsService springUserDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final TokenAuthenticationFilter tokenAuthenticationFilter;
 
     @Value("${jwt.secret.key}")
     private String jwtSecretKey;
 
-    public SecurityConfiguration(SpringUserDetailsService springUserDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public SecurityConfiguration(SpringUserDetailsService springUserDetailsService,
+                                 BCryptPasswordEncoder bCryptPasswordEncoder,
+                                 TokenAuthenticationFilter tokenAuthenticationFilter) {
         this.springUserDetailsService = springUserDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.tokenAuthenticationFilter = tokenAuthenticationFilter;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/healthcheck").permitAll()
-            .antMatchers(HttpMethod.POST, "/registration/**").permitAll()
+        http.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/healthcheck").permitAll()
+                .antMatchers(HttpMethod.POST, "/registration/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/verification/**").permitAll()
-            .anyRequest().authenticated()
-        .and()
-        .addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtSecretKey))
-        .addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtSecretKey))
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .anyRequest().authenticated();
+
+        http.addFilterBefore(tokenAuthenticationFilter, TokenAuthenticationFilter.class);
     }
 
     @Override

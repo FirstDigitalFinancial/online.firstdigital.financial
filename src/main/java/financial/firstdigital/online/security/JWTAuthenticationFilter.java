@@ -1,4 +1,4 @@
-package financial.firstdigital.online.filter;
+package financial.firstdigital.online.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import financial.firstdigital.online.model.ApplicationUser;
