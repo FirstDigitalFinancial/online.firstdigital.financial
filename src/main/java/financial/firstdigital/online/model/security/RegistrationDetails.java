@@ -1,4 +1,4 @@
-package financial.firstdigital.online.model.accounts;
+package financial.firstdigital.online.model.security;
 
 /**
  * Created by Andrew on 16/12/2017.

@@ -1,4 +1,4 @@
-package financial.firstdigital.online.model.accounts;
+package financial.firstdigital.online.model.security;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

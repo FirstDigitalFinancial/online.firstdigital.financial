@@ -1,7 +1,7 @@
 package financial.firstdigital.online.service;
 
 import financial.firstdigital.online.exceptions.RecaptchaException;
-import financial.firstdigital.online.model.accounts.RecaptchaVerificationResponse;
+import financial.firstdigital.online.model.security.RecaptchaVerificationResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;

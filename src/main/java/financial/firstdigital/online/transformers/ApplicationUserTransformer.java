@@ -1,7 +1,8 @@
 package financial.firstdigital.online.transformers;
 
 import financial.firstdigital.online.model.ApplicationUser;
-import financial.firstdigital.online.model.accounts.RegistrationDetails;
+import financial.firstdigital.online.model.security.LoginDetails;
+import financial.firstdigital.online.model.security.RegistrationDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.UUID;
@@ -20,6 +21,14 @@ public class ApplicationUserTransformer {
         applicationUser.setPassword(bCryptPasswordEncoder.encode(registrationDetails.getPassword()));
         applicationUser.setVerified(false);
         applicationUser.setVerificationKey(UUID.randomUUID().toString());
+
+        return applicationUser;
+    }
+
+    public ApplicationUser transform(LoginDetails loginDetails) {
+        ApplicationUser applicationUser = new ApplicationUser();
+        applicationUser.setUsername(loginDetails.getEmailAddress());
+        applicationUser.setPassword(bCryptPasswordEncoder.encode(loginDetails.getPassword()));
 
         return applicationUser;
     }

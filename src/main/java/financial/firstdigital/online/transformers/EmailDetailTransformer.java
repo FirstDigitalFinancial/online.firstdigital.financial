@@ -1,7 +1,7 @@
 package financial.firstdigital.online.transformers;
 
 import financial.firstdigital.online.model.EmailDetail;
-import financial.firstdigital.online.model.accounts.RegistrationDetails;
+import financial.firstdigital.online.model.security.RegistrationDetails;
 
 public class EmailDetailTransformer {
 
