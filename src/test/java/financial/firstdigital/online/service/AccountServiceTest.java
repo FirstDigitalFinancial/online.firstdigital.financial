@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.mockito.Mockito.*;
 
@@ -20,6 +21,8 @@ public class AccountServiceTest {
     private UserDetailsService userDetailsService;
     @Mock
     private ApplicationUserTransformer applicationUserTransformer;
+    @Mock
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private AccountService accountService;
 
@@ -29,7 +32,8 @@ public class AccountServiceTest {
         accountService = new AccountService(applicationUserTransformer,
                 userDetailsService,
                 new PasswordValidation(),
-                new EmailValidation());
+                new EmailValidation(),
+                bCryptPasswordEncoder);
     }
 
     @Test

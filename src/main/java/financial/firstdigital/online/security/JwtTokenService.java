@@ -80,7 +80,7 @@ public class JwtTokenService {
 
             Date now = dateHelper.getDate().toDate();
             if (now.after(jwtToken.getExpirationDate())) {
-                throw new ExpiredException();
+                throw new ExpiredTokenException();
             }
 
             return true;
@@ -88,8 +88,8 @@ public class JwtTokenService {
             logger.info(String.format("MissingClaimException, JwtToken Failed - %s : %s", jwtToken.getUsername(), jwtTokenHash));
         } catch (IncorrectClaimException e) {
             logger.info(String.format("IncorrectClaimException, JwtToken Failed - %s : %s", jwtToken.getUsername(), jwtTokenHash));
-        }  catch (ExpiredException e) {
-            logger.info(String.format("ExpiredException, JwtToken Failed - %s : %s", jwtToken.getUsername(), jwtTokenHash));
+        }  catch (ExpiredTokenException e) {
+            logger.info(String.format("ExpiredTokenException, JwtToken Failed - %s : %s", jwtToken.getUsername(), jwtTokenHash));
         } catch (Exception e) {
             logger.info("UnknownException, JwtToken Failed");
             throw e;
