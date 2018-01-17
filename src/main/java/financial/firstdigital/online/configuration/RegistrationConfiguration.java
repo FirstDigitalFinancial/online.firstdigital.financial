@@ -3,7 +3,6 @@ package financial.firstdigital.online.configuration;
 import financial.firstdigital.online.security.JwtTokenService;
 import financial.firstdigital.online.security.TokenAuthenticationFilter;
 import financial.firstdigital.online.service.RecaptchaVerificationService;
-import financial.firstdigital.online.service.database.UserTokenService;
 import financial.firstdigital.online.transformers.ApplicationUserTransformer;
 import financial.firstdigital.online.transformers.EmailDetailTransformer;
 import financial.firstdigital.online.utils.DateHelper;
@@ -31,9 +30,6 @@ public class RegistrationConfiguration {
     @Value("${google.recaptcha.enabled}")
     private boolean isRecaptchaVerificationEnabled;
 
-    @Value("${jwt.secret.key}")
-    private String jwtSecretKey;
-
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
@@ -57,16 +53,6 @@ public class RegistrationConfiguration {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public JwtTokenService jwtTokenService() {
-        return new JwtTokenService(jwtSecretKey, new DateHelper(), new UuidHelper());
-    }
-
-    @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-        return new TokenAuthenticationFilter(jwtTokenService());
     }
 
     @Bean

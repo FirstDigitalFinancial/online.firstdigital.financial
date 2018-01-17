@@ -1,7 +1,10 @@
 package financial.firstdigital.online.configuration;
 
+import financial.firstdigital.online.security.JwtTokenService;
 import financial.firstdigital.online.security.TokenAuthenticationFilter;
 import financial.firstdigital.online.service.database.SpringUserDetailsService;
+import financial.firstdigital.online.utils.DateHelper;
+import financial.firstdigital.online.utils.UuidHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,5 +62,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
+    }
+
+    @Bean
+    public JwtTokenService jwtTokenService() {
+        return new JwtTokenService(jwtSecretKey, new DateHelper(), new UuidHelper());
+    }
+
+    @Bean
+    public TokenAuthenticationFilter tokenAuthenticationFilter() {
+        return new TokenAuthenticationFilter(jwtTokenService());
     }
 }
