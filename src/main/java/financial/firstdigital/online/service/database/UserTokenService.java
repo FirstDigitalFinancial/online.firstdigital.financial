@@ -21,4 +21,12 @@ public class UserTokenService {
     public JwtToken findByTokenHash(String tokenHash) {
         return tokenRepository.findDistinctByTokenHashEquals(tokenHash);
     }
+
+    public boolean exists(String tokenHash) {
+        return tokenRepository.existsByTokenHash(tokenHash);
+    }
+
+    public JwtToken revokeToken(String tokenHash) {
+        return tokenRepository.deleteDistinctByTokenHashEquals(tokenHash);
+    }
 }
