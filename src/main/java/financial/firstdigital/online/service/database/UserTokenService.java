@@ -3,6 +3,7 @@ package financial.firstdigital.online.service.database;
 import financial.firstdigital.online.model.security.JwtToken;
 import financial.firstdigital.online.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

@@ -30,6 +30,9 @@ public class RegistrationConfiguration {
     @Value("${google.recaptcha.enabled}")
     private boolean isRecaptchaVerificationEnabled;
 
+    @Value("${jwt.secret.key}")
+    private String jwtSecretKey;
+
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
@@ -63,5 +66,15 @@ public class RegistrationConfiguration {
     @Bean
     public RecaptchaVerificationService recaptchaAuthenticationService(RestTemplate restTemplate) {
         return new RecaptchaVerificationService(restTemplate, recaptchaVerifyUrl, recaptchaSecretKey, isRecaptchaVerificationEnabled);
+    }
+
+    @Bean
+    public JwtTokenService jwtTokenService() {
+        return new JwtTokenService(jwtSecretKey, new DateHelper(), new UuidHelper());
+    }
+
+    @Bean
+    public TokenAuthenticationFilter tokenAuthenticationFilter() {
+        return new TokenAuthenticationFilter(jwtTokenService());
     }
 }

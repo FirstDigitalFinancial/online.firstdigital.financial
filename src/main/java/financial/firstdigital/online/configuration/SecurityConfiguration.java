@@ -8,6 +8,7 @@ import financial.firstdigital.online.utils.UuidHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,9 +28,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final SpringUserDetailsService springUserDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final TokenAuthenticationFilter tokenAuthenticationFilter;
-
-    @Value("${jwt.secret.key}")
-    private String jwtSecretKey;
 
     public SecurityConfiguration(SpringUserDetailsService springUserDetailsService,
                                  BCryptPasswordEncoder bCryptPasswordEncoder,
@@ -62,15 +60,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
-    }
-
-    @Bean
-    public JwtTokenService jwtTokenService() {
-        return new JwtTokenService(jwtSecretKey, new DateHelper(), new UuidHelper());
-    }
-
-    @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-        return new TokenAuthenticationFilter(jwtTokenService());
     }
 }
