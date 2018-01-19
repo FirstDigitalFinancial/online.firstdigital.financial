@@ -27,8 +27,9 @@ public class EmailDetailTest {
     public void setUp() throws Exception {
         emailDetailUnderTest = new EmailDetail(1L,
                 "test@firstdigital.financial",
-                EmailType.PRIMARY,
-                true);
+                ContactType.PRIMARY,
+                true,
+                "7f7b353f-aac5-48d2-8f3a-8bc7e666c42c");
     }
 
     /**
@@ -61,7 +62,7 @@ public class EmailDetailTest {
      */
     @Test
     public void getEmailType_EmailTypeIsGot_Passes() throws Exception {
-        Assert.assertEquals(emailDetailUnderTest.getEmailType(), EmailType.PRIMARY);
+        Assert.assertEquals(emailDetailUnderTest.getEmailType(), ContactType.PRIMARY);
     }
 
     /**
@@ -69,8 +70,8 @@ public class EmailDetailTest {
      */
     @Test
     public void setEmailType_EmailTypeIsSet_Passes() throws Exception {
-        emailDetailUnderTest.setEmailType(EmailType.SECONDARY);
-        Assert.assertEquals(emailDetailUnderTest.getEmailType(), EmailType.SECONDARY);
+        emailDetailUnderTest.setEmailType(ContactType.SECONDARY);
+        Assert.assertEquals(emailDetailUnderTest.getEmailType(), ContactType.SECONDARY);
     }
 
     /**
@@ -95,7 +96,7 @@ public class EmailDetailTest {
      */
     @Test
     public void toString_StringReturned_Passes() throws Exception {
-        Assert.assertEquals(emailDetailUnderTest.toString(), "EmailDetail{emailId=1, emailAddress='test@firstdigital.financial', emailType=PRIMARY, isVerified=true}");
+        Assert.assertEquals("EmailDetail{emailId=1, emailAddress='test@firstdigital.financial', contactType=PRIMARY, isVerified=true, verificationKey='7f7b353f-aac5-48d2-8f3a-8bc7e666c42c'}", emailDetailUnderTest.toString());
     }
 
 }

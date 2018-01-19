@@ -2,15 +2,6 @@ package financial.firstdigital.online.model;
 
 import javax.persistence.*;
 
-/**
- * The EmailDetail class contains information
- * about the customers login details
- *
- * @author  Andy McCall
- * @version 0.2
- * @since   2017-09-21
- */
-
 @Entity
 @Table(name = "fdf_email_detail")
 public class EmailDetail {
@@ -23,11 +14,14 @@ public class EmailDetail {
     @Column(name = "emailAddress")
     private String emailAddress;
 
-    @Column(name = "emailType")
-    private EmailType emailType;
+    @Column(name = "contactType")
+    private ContactType contactType = ContactType.PRIMARY;
 
     @Column(name = "isVerified")
     private Boolean isVerified;
+
+    @Column(name = "verificationKey")
+    private String verificationKey;
 
     public Long getEmailId() {
         return emailId;
@@ -41,12 +35,12 @@ public class EmailDetail {
         this.emailAddress = emailAddress;
     }
 
-    public EmailType getEmailType() {
-        return emailType;
+    public ContactType getEmailType() {
+        return contactType;
     }
 
-    public void setEmailType(EmailType emailType) {
-        this.emailType = emailType;
+    public void setEmailType(ContactType contactType) {
+        this.contactType = contactType;
     }
 
     public Boolean getVerified() {
@@ -57,15 +51,24 @@ public class EmailDetail {
         isVerified = verified;
     }
 
+    public String getVerificationKey() {
+        return verificationKey;
+    }
+
+    public void setVerificationKey(String verificationKey) {
+        this.verificationKey = verificationKey;
+    }
+
     public EmailDetail() {
 
     }
 
-    public EmailDetail(Long emailId, String emailAddress, EmailType emailType, Boolean isVerified) {
+    public EmailDetail(Long emailId, String emailAddress, ContactType contactType, Boolean isVerified, String verificationKey) {
         this.emailId = emailId;
         this.emailAddress = emailAddress;
-        this.emailType = emailType;
+        this.contactType = contactType;
         this.isVerified = isVerified;
+        this.verificationKey = verificationKey;
     }
 
     @Override
@@ -73,8 +76,9 @@ public class EmailDetail {
         return "EmailDetail{" +
                 "emailId=" + emailId +
                 ", emailAddress='" + emailAddress + '\'' +
-                ", emailType=" + emailType +
+                ", contactType=" + contactType +
                 ", isVerified=" + isVerified +
+                ", verificationKey='" + verificationKey + '\'' +
                 '}';
     }
 }

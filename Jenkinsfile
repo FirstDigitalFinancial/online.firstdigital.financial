@@ -18,7 +18,7 @@ pipeline {
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                    '''
-                slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                slackSend (color: '#4484c2', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             }
             
         }
@@ -57,12 +57,16 @@ pipeline {
        
     }
     post {
-            success {
-                slackSend (color: '#00FF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-            }
-            failure {
-                slackSend (color: '#FF0000', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-            }
+         success {
+             slackSend (color: '#3ca553', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+             }
+         failure {
+             slackSend (color: '#ce0814', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+             mail(from: "jenkins@firstdigital.financial",
+                    to: "jenkins@firstdigital.financial",
+               subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})",
+                  body: "Check console output at ${env.BUILD_URL} to view the results.")
+             }
          }
     
 }

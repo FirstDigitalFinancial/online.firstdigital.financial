@@ -1,7 +1,7 @@
 package financial.firstdigital.online.controller;
 
 import financial.firstdigital.online.model.*;
-import financial.firstdigital.online.service.*;
+import financial.firstdigital.online.service.database.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,7 +181,7 @@ public class RESTController {
 
         EmailDetail emailDetail = new EmailDetail();
         emailDetail.setEmailAddress("andy.mccall@gmail.com");
-        emailDetail.setEmailType(EmailType.PRIMARY);
+        emailDetail.setEmailType(ContactType.PRIMARY);
         emailDetail.setVerified(true);
 
         Set<EmailDetail> emailDetailSet = new HashSet<EmailDetail>();

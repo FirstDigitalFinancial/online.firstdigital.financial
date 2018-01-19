@@ -1,7 +1,7 @@
 package financial.firstdigital.online.controller;
 
 import financial.firstdigital.online.Application;
-import financial.firstdigital.online.service.HealthCheckDetailService;
+import financial.firstdigital.online.service.database.HealthCheckDetailService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

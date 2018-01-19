@@ -1,8 +1,9 @@
 package financial.firstdigital.online.service;
 
 import financial.firstdigital.online.model.EmailDetail;
-import financial.firstdigital.online.model.EmailType;
+import financial.firstdigital.online.model.ContactType;
 import financial.firstdigital.online.repository.EmailDetailRepository;
+import financial.firstdigital.online.service.database.EmailDetailService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,7 +29,7 @@ public class EmailDetailServiceImplTest {
     EmailDetailRepository mockEmailDetailRepository;
 
     @InjectMocks
-    EmailDetailService emailDetailServiceUnderTest = new EmailDetailServiceImpl();
+    EmailDetailService emailDetailServiceUnderTest = new EmailDetailService();
 
     /**
      * Sets up objects and mocks external dependencies needed
@@ -43,8 +43,9 @@ public class EmailDetailServiceImplTest {
 
         EmailDetail emailDetail = new EmailDetail(Long.valueOf(1),
                                                   "test@firstdigital.financial",
-                                                  EmailType.PRIMARY,
-                                                  true);
+                                                  ContactType.PRIMARY,
+                                                  true,
+                                                "7f7b353f-aac5-48d2-8f3a-8bc7e666c42c");
 
         when(mockEmailDetailRepository.findDistinctByEmailIdEquals(Long.valueOf(1))).thenReturn(emailDetail);
         when(mockEmailDetailRepository.findDistinctByEmailAddressEquals("test@firstdigital.financial")).thenReturn(emailDetail);
@@ -73,14 +74,15 @@ public class EmailDetailServiceImplTest {
     }
 
     /**
-     * Tests EmailDetailServiceImpl.saveEmailDetail()
+     * Tests EmailDetailServiceImpl.saveUserDetails()
      */
     @Test
     public void saveEmailDetail_EmailIsSaved_Passes() throws Exception {
         EmailDetail emailDetail = new EmailDetail(Long.valueOf(2),
                 "test2@firstdigital.financial",
-                EmailType.PRIMARY,
-                true);
+                ContactType.PRIMARY,
+                true,
+                "7f7b353f-aac5-48d2-8f3a-8bc7e666c42c");
 
         emailDetailServiceUnderTest.saveEmailDetail(emailDetail);
 
