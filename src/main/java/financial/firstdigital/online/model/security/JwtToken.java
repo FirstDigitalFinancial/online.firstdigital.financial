@@ -27,7 +27,7 @@ public class JwtToken {
     @Column(name = "withNotBeforeDate", nullable = false)
     private Date withNotBeforeDate;
 
-    @Column(name = "tokenHash", unique = true, nullable = false)
+    @Column(name = "tokenHash", unique = true, nullable = false, length = 512)
     private String tokenHash;
 
     public JwtToken() {
