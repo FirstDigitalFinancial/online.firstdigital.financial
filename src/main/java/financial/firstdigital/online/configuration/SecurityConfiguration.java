@@ -1,5 +1,6 @@
 package financial.firstdigital.online.configuration;
 
+import financial.firstdigital.online.security.JwtAuthenticationEntryPoint;
 import financial.firstdigital.online.security.JwtTokenService;
 import financial.firstdigital.online.security.TokenAuthenticationFilter;
 import financial.firstdigital.online.service.database.SpringUserDetailsService;
@@ -28,18 +29,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final SpringUserDetailsService springUserDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final TokenAuthenticationFilter tokenAuthenticationFilter;
+    private final JwtAuthenticationEntryPoint unauthorizedHandler;
 
     public SecurityConfiguration(SpringUserDetailsService springUserDetailsService,
                                  BCryptPasswordEncoder bCryptPasswordEncoder,
-                                 TokenAuthenticationFilter tokenAuthenticationFilter) {
+                                 TokenAuthenticationFilter tokenAuthenticationFilter,
+                                 JwtAuthenticationEntryPoint  unauthorizedHandler) {
         this.springUserDetailsService = springUserDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.tokenAuthenticationFilter = tokenAuthenticationFilter;
+        this.unauthorizedHandler = unauthorizedHandler;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        http.cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/healthcheck").permitAll()
                 .antMatchers(HttpMethod.POST, "/registration/**").permitAll()

@@ -1,5 +1,6 @@
 package financial.firstdigital.online.configuration;
 
+import financial.firstdigital.online.security.JwtAuthenticationEntryPoint;
 import financial.firstdigital.online.security.JwtTokenService;
 import financial.firstdigital.online.security.TokenAuthenticationFilter;
 import financial.firstdigital.online.service.RecaptchaVerificationService;
@@ -61,6 +62,10 @@ public class RegistrationConfiguration {
     @Bean
     public ApplicationUserTransformer applicationUserTransformer() {
         return new ApplicationUserTransformer(bCryptPasswordEncoder());
+    }
+    @Bean
+    public JwtAuthenticationEntryPoint unauthorizedHandler() {
+        return new JwtAuthenticationEntryPoint();
     }
 
     @Bean

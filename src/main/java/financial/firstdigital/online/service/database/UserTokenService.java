@@ -27,7 +27,7 @@ public class UserTokenService {
         return tokenRepository.existsByTokenHash(tokenHash);
     }
 
-    public JwtToken revokeToken(String tokenHash) {
-        return tokenRepository.deleteDistinctByTokenHashEquals(tokenHash);
+    public void revokeToken(String tokenHash) {
+        tokenRepository.deleteByTokenHash(tokenHash);
     }
 }

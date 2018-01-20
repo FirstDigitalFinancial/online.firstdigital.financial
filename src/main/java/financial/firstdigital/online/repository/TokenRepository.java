@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TokenRepository extends CrudRepository<JwtToken, Long>{
     public JwtToken findDistinctByTokenHashEquals(String tokenHash);
-    public JwtToken deleteDistinctByTokenHashEquals(String tokenHash);
+    public void deleteByTokenHash(String tokenHash);
     public boolean existsByTokenHash(String tokenHash);
 }

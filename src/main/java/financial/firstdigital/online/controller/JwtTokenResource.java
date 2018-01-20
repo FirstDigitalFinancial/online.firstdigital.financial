@@ -1,8 +1,6 @@
 package financial.firstdigital.online.controller;
 
-import financial.firstdigital.online.model.ApplicationUser;
 import financial.firstdigital.online.model.security.JwtToken;
-import financial.firstdigital.online.model.security.RegistrationDetails;
 import financial.firstdigital.online.service.database.UserTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import static financial.firstdigital.online.configuration.SecurityConstants.TOKEN_PREFIX;
 
 @Component
 @RestController
@@ -28,14 +26,20 @@ public class JwtTokenResource {
     }
 
     @RequestMapping(value = "/revoke", method = RequestMethod.POST)
-    public ResponseEntity<String> registerNewUser(@RequestParam("token") String tokenHash) throws Exception {
-        if (tokenHash != null && userTokenService.exists(tokenHash)) {
-            JwtToken token = userTokenService.revokeToken(tokenHash);
+    public ResponseEntity<String> registerNewUser(@RequestHeader(name = "Authorization", required = true) String tokenHeader) throws Exception {
+        if (tokenHeader == null  || !tokenHeader.startsWith(TOKEN_PREFIX)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-            if (token != null) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            } else {
+        String tokenHash = tokenHeader.replace(TOKEN_PREFIX, "").trim();
+
+        if (userTokenService.exists(tokenHash)) {
+            userTokenService.revokeToken(tokenHash);
+
+            if (userTokenService.exists(tokenHash)) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            } else {
+                return new ResponseEntity<>(HttpStatus.OK);
             }
         }
 
