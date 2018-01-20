@@ -59,10 +59,9 @@ public class RegistrationResource {
         if (authenticatedApplicationUser != null) {
             JwtToken jwtToken = tokenService.makeJwtToken(authenticatedApplicationUser);
             String tokenHash = tokenService.generateJwtTokenHash(jwtToken);
-            // store tokenHash and jwtToken in database
+            jwtToken.setTokenHash(tokenHash);
             userTokenService.saveUserToken(jwtToken);
 
-            // return tokenHash to user
             return new ResponseEntity<String>(tokenHash, HttpStatus.OK);
         } else {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

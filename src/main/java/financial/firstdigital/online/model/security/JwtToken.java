@@ -1,14 +1,16 @@
 package financial.firstdigital.online.model.security;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "fdf_jwtToken")
+@Table(name = "fdf_jwt_token")
 public class JwtToken {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "serial")
+    private Long id;
 
     @Column(name = "userFingerPrint", nullable = false)
     private String userFingerPrint;
@@ -25,7 +27,6 @@ public class JwtToken {
     @Column(name = "withNotBeforeDate", nullable = false)
     private Date withNotBeforeDate;
 
-    @Id
     @Column(name = "tokenHash", unique = true, nullable = false)
     private String tokenHash;
 
@@ -91,4 +92,9 @@ public class JwtToken {
     public void setTokenHash(String tokenHash) {
         this.tokenHash = tokenHash;
     }
+
+    public Long getId() {
+        return id;
+    }
+
 }

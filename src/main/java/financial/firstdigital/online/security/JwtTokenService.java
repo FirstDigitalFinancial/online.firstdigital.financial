@@ -10,7 +10,6 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -59,7 +58,7 @@ public class JwtTokenService {
                 .setExpiration(jwtToken.getExpirationDate())
                 .setIssuedAt(jwtToken.getIssuedAtDate())
                 .setNotBefore(jwtToken.getWithNotBeforeDate())
-                .setClaims(claimMap)
+                .setId(jwtToken.getUserFingerPrint())
                 .setHeader(headerClaims)
                 .signWith(SignatureAlgorithm.HS512, jwtSecretKey)
                 .compact();
@@ -67,17 +66,31 @@ public class JwtTokenService {
         return compactJws;
     }
 
-    public boolean validateJwtToken(String jwtTokenHash) {
-        JwtToken jwtToken = userTokenService.findByTokenHash(jwtTokenHash);
+    public JwtToken getStoredToken(String jwtTokenHash) {
+        return userTokenService.findByTokenHash(jwtTokenHash);
+    }
+
+    public boolean validateJwtToken(JwtToken jwtToken, String jwtTokenHash) {
+        if (jwtTokenHash == null) {
+            logger.info(String.format("TokenHash not found: %s", jwtTokenHash));
+            return false;
+        }
+
+        if (jwtToken == null) {
+            logger.info(String.format("JwtToken not found in database: %s", jwtTokenHash));
+            return false;
+        }
+
         try {
             Jws<Claims> claims = Jwts.parser()
                     .requireSubject(jwtToken.getUsername())
                     .requireExpiration(jwtToken.getExpirationDate())
                     .requireIssuedAt(jwtToken.getIssuedAtDate())
                     .requireNotBefore(jwtToken.getWithNotBeforeDate())
-                    .require("userFingerprint", jwtToken.getUserFingerPrint())
+                    .requireId(jwtToken.getUserFingerPrint())
                     .setSigningKey(jwtSecretKey)
                     .parseClaimsJws(jwtTokenHash);
+
 
             Date now = dateHelper.getDate().toDate();
             if (now.after(jwtToken.getExpirationDate())) {
@@ -89,7 +102,7 @@ public class JwtTokenService {
             logger.info(String.format("MissingClaimException, JwtToken Failed - %s : %s", jwtToken.getUsername(), jwtTokenHash));
         } catch (IncorrectClaimException e) {
             logger.info(String.format("IncorrectClaimException, JwtToken Failed - %s : %s", jwtToken.getUsername(), jwtTokenHash));
-        }  catch (ExpiredTokenException e) {
+        } catch (ExpiredTokenException e) {
             logger.info(String.format("ExpiredTokenException, JwtToken Failed - %s : %s", jwtToken.getUsername(), jwtTokenHash));
         } catch (Exception e) {
             logger.info("UnknownException, JwtToken Failed");

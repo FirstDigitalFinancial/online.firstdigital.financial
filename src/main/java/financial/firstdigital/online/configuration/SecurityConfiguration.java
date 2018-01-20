@@ -50,11 +50,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(springUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
-    }
-
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
